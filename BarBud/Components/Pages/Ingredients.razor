@@ -1,0 +1,51 @@
+@page "/ingredients"
+@using BarBud.Models
+@using BarBud
+
+<PageTitle>Ingredients</PageTitle>
+
+<MudText Typo="Typo.h4" GutterBottom="true">Add a New Ingredient</MudText>
+
+<MudPaper Class="pa-4 mb-4" Elevation="2">
+    <MudForm @ref="form" >
+        <MudTextField @bind-Value="newIngredient.Name" Label="Name" Required="true" />
+        <MudTextField @bind-Value="newIngredient.Amount" Label="Amount" Required="true" />
+        <MudTextField @bind-Value="newIngredient.Unit" Label="Unit" Required="true" />
+        <MudButton OnClick="AddIngredient" Color="Color.Primary" Variant="Variant.Filled">Add Ingredient</MudButton>
+    </MudForm>
+</MudPaper>
+
+<MudText Typo="Typo.h5" GutterBottom="true">Ingredient List</MudText>
+<MudTable Items="ingredients" Hover="true">
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Amount</MudTh>
+        <MudTh>Unit</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>@context.Name</MudTd>
+        <MudTd>@context.Amount</MudTd>
+        <MudTd>@context.Unit</MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code {
+    private MudForm form;
+    private Ingredient newIngredient = new Ingredient();
+    private List<Ingredient> ingredients = new();
+
+    private async Task AddIngredient()
+    {
+        await form.Validate();
+        if (form.IsValid)
+        {
+            ingredients.Add(new Ingredient
+            {
+                Name = newIngredient.Name,
+                Amount = newIngredient.Amount,
+                Unit = newIngredient.Unit
+            });
+            newIngredient = new Ingredient();
+        }
+    }
+}

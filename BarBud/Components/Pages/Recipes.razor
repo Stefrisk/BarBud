@@ -1,0 +1,129 @@
+@page "/recipes"
+
+@using BarBud.Models
+
+<PageTitle>Recipes</PageTitle>
+
+<MudText Typo="Typo.h4" GutterBottom="true">Your Recipes</MudText>
+
+<MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="ShowAddDialog">Add New Recipe</MudButton>
+
+<MudTable Items="recipes" Hover="true" Class="mt-4">
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Description</MudTh>
+        <MudTh>Ingredients</MudTh>
+        <MudTh>Actions</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>@context.Name</MudTd>
+        <MudTd>@context.Description</MudTd>
+        <MudTd>@context.Ingredients.Count</MudTd>
+        <MudTd>
+            <MudButton Color="Color.Secondary" Variant="Variant.Text" OnClick="() => EditRecipe(context)">Edit</MudButton>
+            <MudButton Color="Color.Error" Variant="Variant.Text" OnClick="() => DeleteRecipe(context)">Delete</MudButton>
+        </MudTd>
+    </RowTemplate>
+</MudTable>
+
+<MudDialog @bind-IsOpen="isDialogOpen">
+    <DialogContent>
+        <MudText Typo="Typo.h5">@((editingRecipe == null) ? "Add Recipe" : "Edit Recipe")</MudText>
+        <MudForm @ref="form">
+            <MudTextField @bind-Value="recipeModel.Name" Label="Name" Required="true" />
+            <MudTextField @bind-Value="recipeModel.Description" Label="Description" Required="true" />
+            <MudText Typo="Typo.h6" Class="mt-2">Ingredients</MudText>
+            <MudTextField @bind-Value="ingredientName" Label="Ingredient Name" />
+            <MudTextField @bind-Value="ingredientAmount" Label="Amount" />
+            <MudTextField @bind-Value="ingredientUnit" Label="Unit" />
+            <MudButton OnClick="AddIngredientToRecipe" Color="Color.Primary" Variant="Variant.Filled" Class="mb-2">Add Ingredient</MudButton>
+            <MudList T="Ingredient">
+                @foreach (var ing in recipeModel.Ingredients)
+                {
+                    <MudListItem T="Ingredient">@ing.Name (@ing.Amount @ing.Unit)</MudListItem>
+                }
+            </MudList>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="SaveRecipe" Color="Color.Primary">Save</MudButton>
+        <MudButton OnClick="CloseDialog" Color="Color.Secondary">Cancel</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    private List<Recipe> recipes = new();
+    private MudForm form;
+    private bool isDialogOpen = false;
+    private Recipe recipeModel = new();
+    private Recipe editingRecipe = null;
+    private string ingredientName = string.Empty;
+    private string ingredientAmount = string.Empty;
+    private string ingredientUnit = string.Empty;
+
+    private void ShowAddDialog()
+    {
+        recipeModel = new Recipe();
+        editingRecipe = null;
+        isDialogOpen = true;
+    }
+
+    private void EditRecipe(Recipe recipe)
+    {
+        recipeModel = new Recipe
+        {
+            Id = recipe.Id,
+            Name = recipe.Name,
+            Description = recipe.Description,
+            Ingredients = recipe.Ingredients.Select(i => new Ingredient { Name = i.Name, Amount = i.Amount, Unit = i.Unit }).ToList()
+        };
+        editingRecipe = recipe;
+        isDialogOpen = true;
+    }
+
+    private void DeleteRecipe(Recipe recipe)
+    {
+        recipes.Remove(recipe);
+    }
+
+    private void AddIngredientToRecipe()
+    {
+        if (!string.IsNullOrWhiteSpace(ingredientName))
+        {
+            recipeModel.Ingredients.Add(new Ingredient
+            {
+                Name = ingredientName,
+                Amount = ingredientAmount,
+                Unit = ingredientUnit
+            });
+            ingredientName = string.Empty;
+            ingredientAmount = string.Empty;
+            ingredientUnit = string.Empty;
+        }
+    }
+
+    private async Task SaveRecipe()
+    {
+        await form.Validate();
+        if (form.IsValid)
+        {
+            if (editingRecipe == null)
+            {
+                recipeModel.Id = recipes.Count + 1;
+                recipes.Add(recipeModel);
+            }
+            else
+            {
+                editingRecipe.Name = recipeModel.Name;
+                editingRecipe.Description = recipeModel.Description;
+                editingRecipe.Ingredients = recipeModel.Ingredients;
+            }
+            isDialogOpen = false;
+        }
+    }
+
+    private void CloseDialog()
+    {
+        isDialogOpen = false;
+    }
+}
