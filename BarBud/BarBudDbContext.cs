@@ -26,7 +26,7 @@ namespace BarBud
                 .HasForeignKey(ri => ri.IngredientId);
 
             modelBuilder.Entity<Cocktail>()
-                .HasMany(c => c.Tags)
+                .HasMany(c => c.Tags)   
                 .WithMany(t => t.Cocktails);
         }
     }
