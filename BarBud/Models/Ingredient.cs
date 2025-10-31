@@ -4,7 +4,6 @@
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string Amount { get; set; } = string.Empty;
-        public string Unit { get; set; } = string.Empty;
+        public List<RecipeIngredient> RecipeIngredients { get; set; } = new();
     }
 }

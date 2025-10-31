@@ -1,10 +1,18 @@
 using BarBud.Components;
 using MudBlazor.Services;
+using Microsoft.EntityFrameworkCore;
+using BarBud;
+using Microsoft.Data.SqlClient; // Add this using directive
+using Microsoft.EntityFrameworkCore.SqlServer; // Add this using directive
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add MudBlazor services
 builder.Services.AddMudServices();
+
+// Add DbContext for Azure SQL
+builder.Services.AddDbContext<BarBudDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BarBudDb")));
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -21,7 +29,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 
 app.UseAntiforgery();
 

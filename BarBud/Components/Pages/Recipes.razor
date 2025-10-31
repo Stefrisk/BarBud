@@ -7,49 +7,51 @@
 <MudText Typo="Typo.h4" GutterBottom="true">Your Recipes</MudText>
 
 <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="ShowAddDialog">Add New Recipe</MudButton>
+<MudCard>
+    <MudTable Items="recipes" Hover="true" Class="mt-4">
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>Description</MudTh>
+            <MudTh>Ingredients</MudTh>
+            <MudTh>Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>@context.Name</MudTd>
+            <MudTd>@context.Description</MudTd>
+            <MudTd>@context.RecipeIngredients.Count</MudTd>
+            <MudTd>
+                <MudButton Color="Color.Secondary" Variant="Variant.Text" OnClick="() => EditRecipe(context)">Edit</MudButton>
+                <MudButton Color="Color.Error" Variant="Variant.Text" OnClick="() => DeleteRecipe(context)">Delete</MudButton>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
 
-<MudTable Items="recipes" Hover="true" Class="mt-4">
-    <HeaderContent>
-        <MudTh>Name</MudTh>
-        <MudTh>Description</MudTh>
-        <MudTh>Ingredients</MudTh>
-        <MudTh>Actions</MudTh>
-    </HeaderContent>
-    <RowTemplate>
-        <MudTd>@context.Name</MudTd>
-        <MudTd>@context.Description</MudTd>
-        <MudTd>@context.Ingredients.Count</MudTd>
-        <MudTd>
-            <MudButton Color="Color.Secondary" Variant="Variant.Text" OnClick="() => EditRecipe(context)">Edit</MudButton>
-            <MudButton Color="Color.Error" Variant="Variant.Text" OnClick="() => DeleteRecipe(context)">Delete</MudButton>
-        </MudTd>
-    </RowTemplate>
-</MudTable>
+    <MudDialog @bind-IsOpen="isDialogOpen">
+        <DialogContent>
+            <MudText Typo="Typo.h5">@((editingRecipe == null) ? "Add Recipe" : "Edit Recipe")</MudText>
+            <MudForm @ref="form">
+                <MudTextField @bind-Value="recipeModel.Name" Label="Name" Required="true" />
+                <MudTextField @bind-Value="recipeModel.Description" Label="Description" Required="true" />
+                <MudText Typo="Typo.h6" Class="mt-2">Ingredients</MudText>
+                <MudTextField @bind-Value="ingredientName" Label="Ingredient Name" />
+                <MudTextField @bind-Value="ingredientAmount" Label="Amount" />
+                <MudTextField @bind-Value="ingredientUnit" Label="Unit" />
+                <MudButton OnClick="AddIngredientToRecipe" Color="Color.Primary" Variant="Variant.Filled" Class="mb-2">Add Ingredient</MudButton>
+                <MudList T="RecipeIngredient">
+                    @foreach (var ri in recipeModel.RecipeIngredients)
+                    {
+                        <MudListItem T="RecipeIngredient">@ri.Ingredient?.Name (@ri.Amount @ri.Unit)</MudListItem>
+                    }
+                </MudList>
+            </MudForm>
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="SaveRecipe" Color="Color.Primary">Save</MudButton>
+            <MudButton OnClick="CloseDialog" Color="Color.Secondary">Cancel</MudButton>
+        </DialogActions>
+    </MudDialog>
+</MudCard>
 
-<MudDialog @bind-IsOpen="isDialogOpen">
-    <DialogContent>
-        <MudText Typo="Typo.h5">@((editingRecipe == null) ? "Add Recipe" : "Edit Recipe")</MudText>
-        <MudForm @ref="form">
-            <MudTextField @bind-Value="recipeModel.Name" Label="Name" Required="true" />
-            <MudTextField @bind-Value="recipeModel.Description" Label="Description" Required="true" />
-            <MudText Typo="Typo.h6" Class="mt-2">Ingredients</MudText>
-            <MudTextField @bind-Value="ingredientName" Label="Ingredient Name" />
-            <MudTextField @bind-Value="ingredientAmount" Label="Amount" />
-            <MudTextField @bind-Value="ingredientUnit" Label="Unit" />
-            <MudButton OnClick="AddIngredientToRecipe" Color="Color.Primary" Variant="Variant.Filled" Class="mb-2">Add Ingredient</MudButton>
-            <MudList T="Ingredient">
-                @foreach (var ing in recipeModel.Ingredients)
-                {
-                    <MudListItem T="Ingredient">@ing.Name (@ing.Amount @ing.Unit)</MudListItem>
-                }
-            </MudList>
-        </MudForm>
-    </DialogContent>
-    <DialogActions>
-        <MudButton OnClick="SaveRecipe" Color="Color.Primary">Save</MudButton>
-        <MudButton OnClick="CloseDialog" Color="Color.Secondary">Cancel</MudButton>
-    </DialogActions>
-</MudDialog>
 
 @code {
     private List<Recipe> recipes = new();
@@ -75,7 +77,12 @@
             Id = recipe.Id,
             Name = recipe.Name,
             Description = recipe.Description,
-            Ingredients = recipe.Ingredients.Select(i => new Ingredient { Name = i.Name, Amount = i.Amount, Unit = i.Unit }).ToList()
+            RecipeIngredients = recipe.RecipeIngredients.Select(ri => new RecipeIngredient
+            {
+                Ingredient = ri.Ingredient,
+                Amount = ri.Amount,
+                Unit = ri.Unit
+            }).ToList()
         };
         editingRecipe = recipe;
         isDialogOpen = true;
@@ -90,9 +97,9 @@
     {
         if (!string.IsNullOrWhiteSpace(ingredientName))
         {
-            recipeModel.Ingredients.Add(new Ingredient
+            recipeModel.RecipeIngredients.Add(new RecipeIngredient
             {
-                Name = ingredientName,
+                Ingredient = new Ingredient { Name = ingredientName },
                 Amount = ingredientAmount,
                 Unit = ingredientUnit
             });
@@ -116,7 +123,7 @@
             {
                 editingRecipe.Name = recipeModel.Name;
                 editingRecipe.Description = recipeModel.Description;
-                editingRecipe.Ingredients = recipeModel.Ingredients;
+                editingRecipe.RecipeIngredients = recipeModel.RecipeIngredients;
             }
             isDialogOpen = false;
         }
