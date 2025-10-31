@@ -1,10 +1,16 @@
 using BarBud.Components;
 using MudBlazor.Services;
+using Microsoft.EntityFrameworkCore;
+using BarBud;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add MudBlazor services
 builder.Services.AddMudServices();
+
+// Add DbContext for SQLite
+builder.Services.AddDbContext<BarBudDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("BarBudDb") ?? "Data Source=barbud.db"));
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -21,7 +27,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 
 app.UseAntiforgery();
 
