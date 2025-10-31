@@ -8,9 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add MudBlazor services
 builder.Services.AddMudServices();
 
-// Add DbContext for SQLite
+// Add DbContext for Azure SQL
 builder.Services.AddDbContext<BarBudDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("BarBudDb") ?? "Data Source=barbud.db"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BarBudDb")));
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
