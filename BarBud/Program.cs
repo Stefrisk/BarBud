@@ -2,7 +2,6 @@ using BarBud.Components;
 using MudBlazor.Services;
 using Microsoft.EntityFrameworkCore;
 using BarBud;
-using Microsoft.Data.SqlClient; // Add this using directive
 using Microsoft.EntityFrameworkCore.SqlServer; // Add this using directive
 
 var builder = WebApplication.CreateBuilder(args);
