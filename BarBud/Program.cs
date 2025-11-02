@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.SqlServer; // Add this using directive
 var builder = WebApplication.CreateBuilder(args);
 
 // Add MudBlazor services
+// some prrof i can work on this on my riced linux as well =)
 builder.Services.AddMudServices();
 
 // Add DbContext for Azure SQL
