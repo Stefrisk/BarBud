@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: barbud_sql
+    environment:
+      SA_PASSWORD: "bardev123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql-data:/var/opt/mssql
+    restart: unless-stopped
+
+  db-init:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      - db
+    entrypoint: /bin/bash
+    command: -c |
+      echo "Waiting for SQL Server..."
+      until /opt/mssql-tools/bin/sqlcmd -S db -U SA -P "bardev123" -Q "SELECT 1" > /dev/null 2>&1; do sleep 1; done
+      echo "Running init script..."
+      /opt/mssql-tools/bin/sqlcmd -S db -U SA -P "bardev123" -i /init/init.sql
+    volumes:
+      - ./init.sql:/init/init.sql:ro
+    restart: "no"
+
+volumes:
+  mssql-data:
