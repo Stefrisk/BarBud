@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using BarBud.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace BarBud
 {
-    public class BarBudDbContext : DbContext
+    public class BarBudDbContext : IdentityDbContext<User>
     {
         public BarBudDbContext(DbContextOptions<BarBudDbContext> options) : base(options)
         {
