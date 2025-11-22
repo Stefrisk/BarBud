@@ -2,23 +2,36 @@ using BarBud.Components;
 using MudBlazor.Services;
 using Microsoft.EntityFrameworkCore;
 using BarBud;
-using Microsoft.EntityFrameworkCore.SqlServer; // Add this using directive
+
+using Microsoft.EntityFrameworkCore.SqlServer;
+using BarBud.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add MudBlazor services
-// some prrof i can work on this on my riced linux as well =)
 builder.Services.AddMudServices();
 
 // Add DbContext for Azure SQL
 builder.Services.AddDbContext<BarBudDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BarBudDb")));
 
+// Add Identity service and set Identity information stores
+
+builder.Services.AddDefaultIdentity<BarBud.Models.User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BarBudDbContext>();
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddRazorPages();
+
 var app = builder.Build();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
+
+app.MapRazorPages();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
