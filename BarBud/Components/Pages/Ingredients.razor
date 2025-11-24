@@ -1,4 +1,4 @@
-@using MudBlazor.Examples.Data.Models
+
 
 @page "/Ingredients"
 
@@ -11,18 +11,22 @@
         <MudTh>Description</MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="Name">@IngredidentList.Name</MudTd>
-        <MudTd DataLabel="Description">@IngredientList.Description</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Description">@context.Description</MudTd>
     </RowTemplate>
 </MudTable>
 
-<MudCard Outlined="true">
+<MudCard Outlined="true" elevation="2" class="mt-4" width="400px" height="200px" variant="outlined">
     <MudCardContent>
         <MudText>Add an Ingredient</MudText>
-
+        <MudForm @onvalidsubmit="@AddIngredientAsync">
+            <MudTextField Label="Name" Required="true" @bind-Value="@NewIngredient.Name" />
+            <MudTextField Label="Description" @bind-Value="@NewIngredient.Description" />
+            <MudButton></MudButton>
+        </MudForm>
     </MudCardContent>
     <MudCardActions>
-        <MudButton Material="@Icons.Material.Filled.PlusOne" Color="Color.Success">Add</MudButton>
+        <MudButton StartIcon="@Icons.Material.Filled.PlusOne" Color="Color.Success" OnClick="AddIngredientAsync">Add</MudButton>
     </MudCardActions>
 </MudCard>
 

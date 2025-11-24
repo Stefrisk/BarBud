@@ -9,8 +9,9 @@ public partial class Ingredients : ComponentBase
 {
     [Inject] IngredientFunctions IngredientService { get; set; } = default!;
     
-    protected List<Ingredient> IngredientList = new();
+    private List<Ingredient> IngredientList = new();
     protected string? ErrorMessage { get; set; }
+    private Ingredient NewIngredient = new();
 
     protected override async Task OnInitializedAsync()
     {
