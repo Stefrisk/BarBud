@@ -3,7 +3,7 @@ using MudBlazor.Services;
 using Microsoft.EntityFrameworkCore;
 using BarBud;
 using BarBud.Db;
-using Microsoft.EntityFrameworkCore.SqlServer; // Add this using directive
+using Microsoft.EntityFrameworkCore.Sqlite; // Add this using directive
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +12,7 @@ builder.Services.AddMudServices();
 
 // Add DbContext for Azure SQL
 builder.Services.AddDbContext<BarBudDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite("Data Source=barbud.db"));
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
