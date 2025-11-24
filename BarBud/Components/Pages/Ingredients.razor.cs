@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Components;
-using BarBud.Db;
 using BarBud.Models;
 using MudBlazor;
 using BarBud.Services;
@@ -7,19 +6,20 @@ namespace BarBud.Components.Pages;
 
 public partial class Ingredients : ComponentBase
 {
-    [Inject] IngredientFunctions IngredientService { get; set; } = default!;
+    [Inject] private IngredientFunctions IngredientService { get; set; } = null;
     
-    private List<Ingredient> IngredientList = new();
+    private List<Ingredient> _ingredientsList = new();
     protected string? ErrorMessage { get; set; }
     private Ingredient NewIngredient = new();
+    private MudForm? form;
 
     protected override async Task OnInitializedAsync()
     {
         await LoadIngredientsAsync();
     }
-    protected async Task LoadIngredientsAsync() 
+    private async Task LoadIngredientsAsync()
     { 
-        IngredientList = await IngredientService.GetAllIngredientsAsync();
+        _ingredientsList = await IngredientService.GetAllIngredientsAsync();
     }
     protected async Task AddIngredientAsync(Ingredient newIngredient) 
     { 
