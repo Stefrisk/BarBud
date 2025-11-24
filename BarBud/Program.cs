@@ -13,7 +13,7 @@ builder.Services.AddMudServices();
 // Add DbContext for Azure SQL
 builder.Services.AddDbContext<BarBudDbContext>(options =>
     options.UseSqlite("Data Source=barbud.db"));
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BarBudDatabase")));
+    /*options.UseSqlServer(builder.Configuration.GetConnectionString("BarBudDatabase")));*/
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
