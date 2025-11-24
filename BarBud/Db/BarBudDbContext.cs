@@ -1,7 +1,8 @@
-using Microsoft.EntityFrameworkCore;
 using BarBud.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace BarBud
+
+namespace BarBud.Db
 {
     public class BarBudDbContext : DbContext
     {
