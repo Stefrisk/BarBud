@@ -1,11 +1,32 @@
+@using MudBlazor.Examples.Data.Models
+
 @page "/Ingredients"
+
 <MudText>Ingredients</MudText>
 <MudAlert>Coming soon!</MudAlert>
-<MudCard elevation="1" class="mt-4" width="100%" height="100%" variant="outlined" color="primary" square="true">
-    <MudCardHeader color="primary" variant="outlined" height="100%" class="d-flex align-items-center">
-        <MudText>Ingredidents</MudText>
-    </MudCardHeader>
-</MudCard>
-@code {
 
-}
+<MudTable Items="@IngredientList" Hover="true">
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Description</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@IngredidentList.Name</MudTd>
+        <MudTd DataLabel="Description">@IngredientList.Description</MudTd>
+    </RowTemplate>
+</MudTable>
+
+<MudCard Outlined="true">
+    <MudCardContent>
+        <MudText>Add an Ingredient</MudText>
+
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Material="@Icons.Material.Filled.PlusOne" Color="Color.Success">Add</MudButton>
+    </MudCardActions>
+</MudCard>
+
+
+
+
+
