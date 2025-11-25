@@ -2,6 +2,8 @@
 using MudBlazor.Services;
 using Microsoft.EntityFrameworkCore;
 using BarBud;
+using BarBud.Db;
+using Microsoft.EntityFrameworkCore.Sqlite; // Add this using directive
 
 using Microsoft.EntityFrameworkCore.SqlServer;
 using BarBud.Models;
@@ -16,7 +18,8 @@ builder.Services.AddMudServices();
 
 // Add DbContext for Azure SQL
 builder.Services.AddDbContext<BarBudDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BarBudDb")));
+    options.UseSqlite("Data Source=barbud.db"));
+    /*options.UseSqlServer(builder.Configuration.GetConnectionString("BarBudDatabase")));*/
 
 
 // Add services to the container.

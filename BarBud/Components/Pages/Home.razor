@@ -2,12 +2,19 @@
 
 <PageTitle>Home</PageTitle>
 
-<MudText Typo="Typo.h3" GutterBottom="true">Hello, world!</MudText>
+<MudText Typo="Typo.h3" GutterBottom="true">Welcome to BarBud!</MudText>
 
 <MudText Typo="Typo.body1" Class="mb-4">
     <b>BarBud</b> is your personal bartending recipe journal. Easily store, organize, and revisit your cocktail recipe ideas. Whether you're experimenting with new drinks or keeping track of your favorites, BarBud helps you build your own cocktail collection.
 </MudText>
 
-<MudText Typo="Typo.body2">
-    Insert image here.
-</MudText>
+<div style="border: 2px solid red; width: 100%;">
+    <MudStack Row="true" AlignItems="@AlignItems.Start" JustifyContent="FlexStart" Spacing="5" Class="bg-grey-light">
+        
+        <MudStack AlignItems="@AlignItems.Center" Spacing="1">
+            <MudImage Src="drink.jpg" Width="150" Height="400" Alt="Fancy Drink" Elevation="25"/>
+            <MudText Typo="Typo.caption">Colorful Vibes</MudText>
+        </MudStack>
+
+    </MudStack>
+</div>

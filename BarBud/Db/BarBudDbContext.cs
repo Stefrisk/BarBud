@@ -1,8 +1,9 @@
+using BarBud.Models;
 using Microsoft.EntityFrameworkCore;
 using BarBud.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace BarBud
+namespace BarBud.Db
 {
     public class BarBudDbContext : IdentityDbContext<User>
     {
