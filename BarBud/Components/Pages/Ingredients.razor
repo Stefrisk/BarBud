@@ -1,0 +1,33 @@
+
+
+@page "/Ingredients"
+
+<MudText>Ingredients</MudText>
+<MudAlert>Coming soon!</MudAlert>
+
+<MudTable Items="@_ingredientsList" Hover="true">
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Description</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Description">@context.Description</MudTd>
+    </RowTemplate>
+</MudTable>
+
+<MudCard Outlined="true" elevation="2" class="mt-4" width="400px" height="200px" variant="outlined">
+    <MudCardContent>
+        <MudText>Add an Ingredient</MudText>
+        <MudForm @ref="form" OnValidSubmit="@NewIngredient">
+            <MudTextField Label="Name" Required="true" @bind-Value="@NewIngredient.Name" />
+            <MudTextField Label="Description" @bind-Value="@NewIngredient.Description" />
+            <MudButton ButtonType="ButtonType.Submit" StartIcon="@Icons.Material.Filled.PlusOne" Color="Color.Success"></MudButton>
+        </MudForm>
+    </MudCardContent>
+</MudCard>
+
+
+
+
+
