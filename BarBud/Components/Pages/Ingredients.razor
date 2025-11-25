@@ -1,6 +1,5 @@
-
-
 @page "/Ingredients"
+@rendermode InteractiveServer
 
 <MudText>Ingredients</MudText>
 <MudAlert>Coming soon!</MudAlert>
@@ -19,15 +18,10 @@
 <MudCard Outlined="true" elevation="2" class="mt-4" width="400px" height="200px" variant="outlined">
     <MudCardContent>
         <MudText>Add an Ingredient</MudText>
-        <MudForm @ref="form" OnValidSubmit="@NewIngredient">
+        <MudForm @ref="form">
             <MudTextField Label="Name" Required="true" @bind-Value="@NewIngredient.Name" />
             <MudTextField Label="Description" @bind-Value="@NewIngredient.Description" />
-            <MudButton ButtonType="ButtonType.Submit" StartIcon="@Icons.Material.Filled.PlusOne" Color="Color.Success"></MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Color="Color.Success" OnClick="@(async() => await AddIngredientAsync(NewIngredient))">Submit</MudButton>
         </MudForm>
     </MudCardContent>
 </MudCard>
-
-
-
-
-

@@ -14,6 +14,9 @@ builder.Services.AddMudServices();
 builder.Services.AddDbContext<BarBudDbContext>(options =>
     options.UseSqlite("Data Source=barbud.db"));
 
+// Register IngredientFunctions service
+builder.Services.AddScoped<BarBud.Services.IngredientFunctions>();
+
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

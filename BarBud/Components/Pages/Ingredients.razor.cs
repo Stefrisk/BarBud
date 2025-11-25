@@ -13,6 +13,7 @@ public partial class Ingredients : ComponentBase
     private Ingredient NewIngredient = new();
     private MudForm? form;
 
+
     protected override async Task OnInitializedAsync()
     {
         await LoadIngredientsAsync();
@@ -21,16 +22,19 @@ public partial class Ingredients : ComponentBase
     { 
         _ingredientsList = await IngredientService.GetAllIngredientsAsync();
     }
-    protected async Task AddIngredientAsync(Ingredient newIngredient) 
+    private async Task AddIngredientAsync(Ingredient newIngredient)
     { 
         ErrorMessage = null;
+        
         if (string.IsNullOrWhiteSpace(newIngredient.Name))
         {
             ErrorMessage = "An Ingredient name is required";
             return;
         }
         
+        
         await IngredientService.AddAsync(newIngredient);
+        
         await LoadIngredientsAsync();
     }
     
