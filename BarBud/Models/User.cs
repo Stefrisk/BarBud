@@ -1,6 +1,6 @@
-﻿namespace BarBud.Models
+﻿using Microsoft.AspNetCore.Identity;
+namespace BarBud.Models;
+
+public class User : IdentityUser
 {
-    public class User : Microsoft.AspNetCore.Identity.IdentityUser
-    {
-    }
 }
