@@ -1,24 +1,62 @@
-using BarBud.Components;
+﻿using BarBud.Components;
 using MudBlazor.Services;
 using Microsoft.EntityFrameworkCore;
 using BarBud;
-using Microsoft.EntityFrameworkCore.SqlServer; // Add this using directive
+using BarBud.Db;
+using Microsoft.EntityFrameworkCore.Sqlite;
+
+using Microsoft.EntityFrameworkCore.SqlServer;
+using BarBud.Models;
+using BarBud.Components.Account;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add MudBlazor services
-// some prrof i can work on this on my riced linux as well =)
 builder.Services.AddMudServices();
 
-// Add DbContext for Azure SQL
+
 builder.Services.AddDbContext<BarBudDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BarBudDatabase")));
+    options.UseSqlite("Data Source=barbud.db"));
+
+
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddRazorPages();
+
+builder.Services.AddCascadingAuthenticationState();
+
+builder.Services.AddScoped<IdentityUserAccessor>();
+
+builder.Services.AddScoped<IdentityRedirectManager>();
+
+builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
+
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultScheme = IdentityConstants.ApplicationScheme;
+        options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+    })
+    .AddIdentityCookies();
+
+builder.Services.AddIdentityCore<User>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<BarBudDbContext>()
+    .AddSignInManager()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddSingleton<IEmailSender<User>, IdentityNoOpEmailSender>();
+
 var app = builder.Build();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
+
+app.MapRazorPages();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -35,5 +73,7 @@ app.UseAntiforgery();
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+
+app.MapAdditionalIdentityEndpoints();;
 
 app.Run();
