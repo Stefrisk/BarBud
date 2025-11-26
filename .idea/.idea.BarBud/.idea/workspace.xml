@@ -10,6 +10,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e92de44c-15cf-4792-9688-22b96ae1d45f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarBud/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarBud/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarBud/BarBud.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/BarBud.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarBud/Migrations/20251126151413_InitialCreate.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarBud/Migrations/BarBudDbContextModelSnapshot.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +42,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/BarBud/.config/dotnet-tools.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///home/stefrisk/RiderProjects/BarBud/BarBud/Db/DesignTimeDbContextFactory.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BarBud/Services/IngredientFunctions.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -54,33 +58,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.BarBud: http.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Dev&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.inline.completion&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.BarBud: http.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "ToolWindow.Commit.ShowToolbar": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "Dev",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.inline.completion",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlserver.localdb&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlserver.localdb"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.BarBud: http">
     <configuration name="BarBud: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/BarBud/BarBud.csproj" />
@@ -133,7 +138,7 @@
       <workItem from="1763837511885" duration="437000" />
       <workItem from="1763999615251" duration="2203000" />
       <workItem from="1764168153136" duration="1106000" />
-      <workItem from="1764169297709" duration="1634000" />
+      <workItem from="1764169297709" duration="3669000" />
     </task>
     <task id="LOCAL−00001" summary="#41 - Database - Set up my local database for function testing.">
       <option name="closed" value="true" />
@@ -166,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764170488316</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Update workspace configuration and add initial migration for database setup">
+      <option name="closed" value="true" />
+      <created>1764171246445</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1764171246445</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,7 +193,8 @@
     <MESSAGE value="Added Cocktail page to nav bar, added cocktalfuntions as service in program.cs. Small changes in cocktail page to get it to successfully build" />
     <MESSAGE value="Add database setup guide and update DesignTimeDbContextFactory for SQLite" />
     <MESSAGE value="workspace files commited" />
-    <option name="LAST_COMMIT_MESSAGE" value="workspace files commited" />
+    <MESSAGE value="Update workspace configuration and add initial migration for database setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update workspace configuration and add initial migration for database setup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

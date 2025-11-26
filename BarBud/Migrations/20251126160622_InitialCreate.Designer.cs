@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarBud.Migrations
 {
     [DbContext(typeof(BarBudDbContext))]
-    [Migration("20251126151413_InitialCreate")]
+    [Migration("20251126160622_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
