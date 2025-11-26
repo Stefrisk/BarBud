@@ -18,11 +18,11 @@ namespace BarBud.Components.Pages
         {
             await LoadCocktailsAsync();
         }
-        private async Task LoadCocktailsAsync()
+        public async Task LoadCocktailsAsync()
         {
             _cocktailsList = await CocktailService.GetAllCocktailsAsync();
         }
-        protected async Task AddCocktailsAsync(Cocktail newCocktail)
+        public async Task AddCocktailsAsync(Cocktail newCocktail)
         {
             ErrorMessage = null;
             if (string.IsNullOrWhiteSpace(newCocktail.Name))
@@ -33,12 +33,12 @@ namespace BarBud.Components.Pages
             await CocktailService.AddAsync(newCocktail);
             await LoadCocktailsAsync();
         }
-        protected async Task DeleteCocktailAsync(int id)
+        public async Task DeleteCocktailAsync(int id)
         {
             await CocktailService.DeleteAsync(id);
             await LoadCocktailsAsync();
         }
-        protected async Task UpdateCocktailAsync(Cocktail cocktail)
+        public async Task UpdateCocktailAsync(Cocktail cocktail)
         {
             await CocktailService.UpdateAsync(cocktail);
             await LoadCocktailsAsync();

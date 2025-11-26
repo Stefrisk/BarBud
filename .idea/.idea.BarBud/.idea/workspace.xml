@@ -9,15 +9,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e92de44c-15cf-4792-9688-22b96ae1d45f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/BarBud/Models/Cocktail.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Models/Cocktail.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarBud/Models/Ingredient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Models/Ingredient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarBud/Models/Recipe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Models/Recipe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarBud/Services/IngredientFunctions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Services/IngredientFunctions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarBud/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarBud/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarBud/Components/Pages/Cocktails.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Components/Pages/Cocktails.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarBud/Components/Pages/Cocktails.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Components/Pages/Cocktails.razor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarBud/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,6 +42,9 @@
     <setting file="file://$PROJECT_DIR$/BarBud/Services/IngredientFunctions.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -49,6 +55,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    ".NET Launch Settings Profile.BarBud: http.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -56,7 +63,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "Anton",
+    "git-widget-placeholder": "#68-Create-Cocktail-Functions/Frontend",
     "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -132,7 +139,15 @@
       <option name="presentableId" value="LOCAL−00001" />
       <updated>1764000863259</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added Cocktail page to nav bar, added cocktalfuntions as service in program.cs. Small changes in cocktail page to get it to successfully build">
+      <option name="closed" value="true" />
+      <created>1764165491168</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1764165491168</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,7 +158,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="#41 - Database - Set up my local database for function testing." />
-    <option name="LAST_COMMIT_MESSAGE" value="#41 - Database - Set up my local database for function testing." />
+    <MESSAGE value="Added Cocktail page to nav bar, added cocktalfuntions as service in program.cs. Small changes in cocktail page to get it to successfully build" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Cocktail page to nav bar, added cocktalfuntions as service in program.cs. Small changes in cocktail page to get it to successfully build" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
