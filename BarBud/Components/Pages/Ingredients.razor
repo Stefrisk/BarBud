@@ -16,12 +16,14 @@
         <col style="width:30%" />
         <col style="width:50%" />
         <col style="width:20%" />
+        <col style="width:10%" />
     </ColGroup>
 
     <HeaderContent >
         <MudTh>Name</MudTh>
         <MudTh>Description</MudTh>
         <MudTh>Amount</MudTh>
+        <MudTh> </MudTh>
     </HeaderContent>
 
     <RowTemplate>
@@ -39,6 +41,12 @@
         <MudTd Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor:pointer;"
                @onclick="() => OnRowClick(ingredient)">
             @ingredient.Amount
+        </MudTd>
+        <MudTd Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor:pointer;"
+                @onclick="() => OnRowClick(ingredient)">
+                <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                            Color="Color.Error"
+                            OnClick="async () => await DeleteIngredientAsync(ingredient.Id)" />
         </MudTd>
     </RowTemplate>
 
