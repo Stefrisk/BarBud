@@ -10,11 +10,8 @@ namespace BarBud.Db
         {
             var builder = new DbContextOptionsBuilder<BarBudDbContext>();
 
-            // Use the project-local SQLite file. This keeps the EF tools working without needing appsettings.
-            var dbPath = Path.Combine(Directory.GetCurrentDirectory(), "barbud.db");
-            var conn = $"Data Source={dbPath}";
-
-            builder.UseSqlite(conn);
+            // Use the same connection string as Program.cs
+            builder.UseSqlite("Data Source=barbud.db");
 
             return new BarBudDbContext(builder.Options);
         }
