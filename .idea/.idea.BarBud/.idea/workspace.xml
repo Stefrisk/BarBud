@@ -11,6 +11,7 @@
     <list default="true" id="e92de44c-15cf-4792-9688-22b96ae1d45f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarBud/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarBud/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BarBud/Components/Pages/Ingredients.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Components/Pages/Ingredients.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarBud/Components/Pages/Ingredients.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Components/Pages/Ingredients.razor.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +74,7 @@
     "ToolWindow.Commit.ShowToolbar": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "67-delete-ingredients",
+    "git-widget-placeholder": "feat-Ingredient-page-Add-search-bar-",
     "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

@@ -9,6 +9,19 @@ public partial class Ingredients : ComponentBase
     [Inject] private IngredientFunctions IngredientService { get; set; } = null;
     
     private List<Ingredient> _ingredientsList = new();
+    private List<Ingredient> filteredIngredientsList = new();
+    private string SearchString
+    {
+        get => _searchString;
+        set
+        {
+            _searchString = value;
+            filteredIngredientsList = _ingredientsList
+                .Where(i => i.Name.Contains(value, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+    }
+    private string _searchString { get; set; }
     protected string? ErrorMessage { get; set; }
     private Ingredient NewIngredient = new();
     private MudForm? form;
@@ -18,6 +31,7 @@ public partial class Ingredients : ComponentBase
     {
         await LoadIngredientsAsync();
     }
+
     private async Task LoadIngredientsAsync()
     { 
         _ingredientsList = await IngredientService.GetAllIngredientsAsync();

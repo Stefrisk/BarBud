@@ -6,8 +6,14 @@
 
 <MudText>Ingredients</MudText>
 <MudAlert>Coming soon!</MudAlert>
+<MudTextField @bind-Value="SearchString" Placeholder="Search ingredients..."
+              Adornment="Adornment.Start"
+              AdornmentIcon="@Icons.Material.Filled.Search"
+              Immediate="true"
+              Clearable="true"
+              Class="mb-2" ></MudTextField>
 
-<MudTable Items="@_ingredientsList"
+<MudTable Items="@filteredIngredientsList"
           T="Ingredient"
           Hover="true"
           Style="table-layout: fixed; width: 100%;">
