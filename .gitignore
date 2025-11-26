@@ -13,6 +13,17 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# Fody - auto-generated XML schema
+FodyWeavers.xsd
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# JetBrains Rider/IntelliJ IDEA
+.idea/
+
 # Mono auto generated files
 mono_crash.*
 

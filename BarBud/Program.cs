@@ -1,9 +1,7 @@
 ﻿using BarBud.Components;
 using MudBlazor.Services;
 using Microsoft.EntityFrameworkCore;
-using BarBud;
 using BarBud.Db;
-using Microsoft.EntityFrameworkCore.Sqlite;
 
 using Microsoft.EntityFrameworkCore.SqlServer;
 using BarBud.Models;
@@ -16,9 +14,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add MudBlazor services
 builder.Services.AddMudServices();
 
-
 builder.Services.AddDbContext<BarBudDbContext>(options =>
     options.UseSqlite("Data Source=barbud.db"));
+
+// Register IngredientFunctions service
+builder.Services.AddScoped<BarBud.Services.IngredientFunctions>();
 
 
 
