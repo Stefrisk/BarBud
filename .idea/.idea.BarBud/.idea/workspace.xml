@@ -10,9 +10,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e92de44c-15cf-4792-9688-22b96ae1d45f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarBud/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarBud/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarBud/Components/Pages/Cocktails.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Components/Pages/Cocktails.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarBud/Components/Pages/Cocktails.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Components/Pages/Cocktails.razor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarBud/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarBud/Db/DesignTimeDbContextFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Db/DesignTimeDbContextFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarBud/Migrations/20251125141818_AddIdentityTables.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarBud/Migrations/20251125141818_AddIdentityTables.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +21,10 @@
   </component>
   <component name="DpaMonitoringSettings">
     <option name="firstShow" value="false" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="3" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -34,11 +38,12 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Stefrisk/BarBud.git&quot;,
-    &quot;accountId&quot;: &quot;704f30bc-b269-4019-9564-7b62b7d75d82&quot;
+    &quot;accountId&quot;: &quot;ca0fff7a-21c6-4777-a769-9595b3d9b872&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/BarBud/Services/DrinkServices.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///home/stefrisk/RiderProjects/BarBud/BarBud/Components/Pages/Cocktails.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///home/stefrisk/RiderProjects/BarBud/BarBud/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BarBud/Services/IngredientFunctions.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -63,7 +68,7 @@
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;#68-Create-Cocktail-Functions/Frontend&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Dev&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -131,6 +136,8 @@
       <workItem from="1763761793268" duration="234000" />
       <workItem from="1763837511885" duration="437000" />
       <workItem from="1763999615251" duration="2203000" />
+      <workItem from="1764168153136" duration="1106000" />
+      <workItem from="1764169297709" duration="877000" />
     </task>
     <task id="LOCAL−00001" summary="#41 - Database - Set up my local database for function testing.">
       <option name="closed" value="true" />
@@ -178,5 +185,13 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
   </component>
 </project>
