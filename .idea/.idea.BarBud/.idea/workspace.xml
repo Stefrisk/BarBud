@@ -8,12 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e92de44c-15cf-4792-9688-22b96ae1d45f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BarBud/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarBud/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarBud/BarBud.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/BarBud.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarBud/Migrations/20251126151413_InitialCreate.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarBud/Migrations/BarBudDbContextModelSnapshot.cs" beforeDir="false" />
-    </list>
+    <list default="true" id="e92de44c-15cf-4792-9688-22b96ae1d45f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,6 +39,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/BarBud/.config/dotnet-tools.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///home/stefrisk/RiderProjects/BarBud/BarBud/Db/DesignTimeDbContextFactory.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/stefrisk/RiderProjects/BarBud/BarBud/Migrations/BarBudDbContextModelSnapshot.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BarBud/Services/IngredientFunctions.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -138,7 +134,7 @@
       <workItem from="1763837511885" duration="437000" />
       <workItem from="1763999615251" duration="2203000" />
       <workItem from="1764168153136" duration="1106000" />
-      <workItem from="1764169297709" duration="3669000" />
+      <workItem from="1764169297709" duration="3995000" />
     </task>
     <task id="LOCAL−00001" summary="#41 - Database - Set up my local database for function testing.">
       <option name="closed" value="true" />
@@ -179,7 +175,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764171246445</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="db should work now with updated migration">
+      <option name="closed" value="true" />
+      <created>1764173292468</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1764173292468</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,7 +198,8 @@
     <MESSAGE value="Add database setup guide and update DesignTimeDbContextFactory for SQLite" />
     <MESSAGE value="workspace files commited" />
     <MESSAGE value="Update workspace configuration and add initial migration for database setup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update workspace configuration and add initial migration for database setup" />
+    <MESSAGE value="db should work now with updated migration" />
+    <option name="LAST_COMMIT_MESSAGE" value="db should work now with updated migration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
