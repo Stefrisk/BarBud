@@ -10,9 +10,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e92de44c-15cf-4792-9688-22b96ae1d45f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarBud/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarBud/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarBud/Db/DesignTimeDbContextFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Db/DesignTimeDbContextFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarBud/Migrations/20251125141818_AddIdentityTables.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarBud/Migrations/20251125141818_AddIdentityTables.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +39,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///home/stefrisk/RiderProjects/BarBud/BarBud/Components/Pages/Cocktails.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///home/stefrisk/RiderProjects/BarBud/BarBud/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/stefrisk/RiderProjects/BarBud/BarBud/Db/DesignTimeDbContextFactory.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BarBud/Services/IngredientFunctions.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -137,7 +133,7 @@
       <workItem from="1763837511885" duration="437000" />
       <workItem from="1763999615251" duration="2203000" />
       <workItem from="1764168153136" duration="1106000" />
-      <workItem from="1764169297709" duration="877000" />
+      <workItem from="1764169297709" duration="1634000" />
     </task>
     <task id="LOCAL−00001" summary="#41 - Database - Set up my local database for function testing.">
       <option name="closed" value="true" />
@@ -154,7 +150,23 @@
       <option name="project" value="LOCAL" />
       <updated>1764165491168</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add database setup guide and update DesignTimeDbContextFactory for SQLite">
+      <option name="closed" value="true" />
+      <created>1764170306672</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1764170306673</updated>
+    </task>
+    <task id="LOCAL-00004" summary="workspace files commited">
+      <option name="closed" value="true" />
+      <created>1764170488316</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1764170488316</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,7 +178,9 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="#41 - Database - Set up my local database for function testing." />
     <MESSAGE value="Added Cocktail page to nav bar, added cocktalfuntions as service in program.cs. Small changes in cocktail page to get it to successfully build" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Cocktail page to nav bar, added cocktalfuntions as service in program.cs. Small changes in cocktail page to get it to successfully build" />
+    <MESSAGE value="Add database setup guide and update DesignTimeDbContextFactory for SQLite" />
+    <MESSAGE value="workspace files commited" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace files commited" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
