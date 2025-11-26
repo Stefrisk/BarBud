@@ -1,27 +1,59 @@
 @page "/Ingredients"
+@inject IDialogService DialogService
+@using BarBud.Models
+
 @rendermode InteractiveServer
 
 <MudText>Ingredients</MudText>
 <MudAlert>Coming soon!</MudAlert>
 
-<MudTable Items="@_ingredientsList" Hover="true">
-    <HeaderContent>
+<MudTable Items="@_ingredientsList"
+          T="Ingredient"
+          Hover="true"
+          Style="table-layout: fixed; width: 100%;">
+    
+    <ColGroup>
+        <col style="width:30%" />
+        <col style="width:50%" />
+        <col style="width:20%" />
+    </ColGroup>
+
+    <HeaderContent >
         <MudTh>Name</MudTh>
         <MudTh>Description</MudTh>
+        <MudTh>Amount</MudTh>
     </HeaderContent>
+
     <RowTemplate>
-        <MudTd DataLabel="Name">@context.Name</MudTd>
-        <MudTd DataLabel="Description">@context.Description</MudTd>
+        @{
+            var ingredient = context;
+        }
+        <MudTd Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor:pointer;"
+               @onclick="() => OnRowClick(ingredient)">
+            @ingredient.Name
+        </MudTd>
+        <MudTd Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor:pointer;"
+               @onclick="() => OnRowClick(ingredient)">
+            @ingredient.Description
+        </MudTd>
+        <MudTd Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor:pointer;"
+               @onclick="() => OnRowClick(ingredient)">
+            @ingredient.Amount
+        </MudTd>
     </RowTemplate>
+
 </MudTable>
 
-<MudCard Outlined="true" elevation="2" class="mt-4" width="400px" height="200px" variant="outlined">
+<MudCard Outlined="true" elevation="2" class="mt-4" width="400px" height="250px" variant="outlined">
     <MudCardContent>
         <MudText>Add an Ingredient</MudText>
         <MudForm @ref="form">
             <MudTextField Label="Name" Required="true" @bind-Value="@NewIngredient.Name" />
             <MudTextField Label="Description" @bind-Value="@NewIngredient.Description" />
-            <MudButton ButtonType="ButtonType.Submit" Color="Color.Success" OnClick="@(async() => await AddIngredientAsync(NewIngredient))">Submit</MudButton>
+            <MudTextField Label="Amount" @bind-Value="@NewIngredient.Amount" />
+            <MudButton ButtonType="ButtonType.Submit"
+                       Color="Color.Success"
+                       OnClick="@(async() => await AddIngredientAsync(NewIngredient))">Submit</MudButton>
         </MudForm>
     </MudCardContent>
 </MudCard>
