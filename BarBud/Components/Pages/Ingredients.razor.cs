@@ -38,14 +38,29 @@ public partial class Ingredients : ComponentBase
         await LoadIngredientsAsync();
     }
     
+    private async Task OnRowClick(Ingredient ingredient)
+    {
+        var parameters = new DialogParameters
+        {
+            ["Ingredient"] = ingredient
+        };
+
+        var dialog = DialogService.Show<EditIngredientDialog>("Edit Ingredient", parameters);
+        var result = await dialog.Result;
+
+        if (!result!.Canceled)
+        {
+            var updated = (Ingredient)result.Data!;
+
+            await IngredientService.UpdateAsync(updated);
+
+            _ingredientsList = await IngredientService.GetAllIngredientsAsync();
+        }
+    }
+    
     protected async Task DeleteIngredientAsync(int id)
     {
         await IngredientService.DeleteAsync(id);
-        await LoadIngredientsAsync();
-    }
-    protected async Task UpdateIngredientAsync(Ingredient ingredient)
-    {
-        await IngredientService.UpdateAsync(ingredient);
         await LoadIngredientsAsync();
     }
 }
