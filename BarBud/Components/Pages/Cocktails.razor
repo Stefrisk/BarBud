@@ -1,5 +1,130 @@
-﻿<h3>Cocktails</h3>
+﻿@page "/cocktails"
 
-@code {
 
-}
+<MudPaper Class="pa-4" Elevation="3">
+    <MudStack Spacing="3">
+
+        <!-- Title & intro -->
+        <MudStack Row="true"  JustifyContent="SpaceBetween">
+            <MudText Typo="Typo.h4">
+                Cocktails
+            </MudText>
+            <MudText Typo="Typo.subtitle2" Class="text-secondary">
+                Manage your BarBud cocktail collection
+            </MudText>
+        </MudStack>
+
+        <!-- Add New Cocktail -->
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" GutterBottom="true">
+                Add a new cocktail
+            </MudText>
+
+            <MudForm @ref="form" OnValidSubmit="@(() => AddCocktailsAsync(newCocktail))">
+                <MudGrid GutterSize="3">
+                    <MudItem xs="12" md="4">
+                        <MudTextField @bind-Value="newCocktail.Name"
+                                      Label="Name"
+                                      For="@(() => newCocktail.Name)"
+                                      Required="true"
+                                      RequiredError="Name is required"
+                                      Variant="Variant.Outlined"
+                                      FullWidth="true" />
+                    </MudItem>
+
+                    @* Uncomment / adjust these if your model has these properties *@
+                    @* 
+                    <MudItem xs="12" md="4">
+                        <MudTextField @bind-Value="newCocktail.Description"
+                                      Label="Description"
+                                      Variant="Variant.Outlined"
+                                      FullWidth="true" />
+                    </MudItem>
+
+                    <MudItem xs="12" md="4">
+                        <MudTextField @bind-Value="newCocktail.Ingredients"
+                                      Label="Ingredients"
+                                      Variant="Variant.Outlined"
+                                      FullWidth="true" />
+                    </MudItem>
+                    *@
+
+                    <MudItem xs="12">
+                        <MudStack Row="true" Spacing="2" >
+                            <MudButton Color="Color.Primary"
+                                       Variant="Variant.Filled"
+                                       ButtonType="ButtonType.Submit">
+                                Add Cocktail
+                            </MudButton>
+
+                            @if (!string.IsNullOrWhiteSpace(ErrorMessage))
+                            {
+                                <MudAlert Severity="Severity.Error" Dense="true">
+                                    @ErrorMessage
+                                </MudAlert>
+                            }
+                        </MudStack>
+                    </MudItem>
+                </MudGrid>
+            </MudForm>
+        </MudPaper>
+
+        <!-- Cocktails List -->
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" GutterBottom="true">
+                Your cocktails
+            </MudText>
+
+            <MudTable Items="_cocktailsList" Dense="true" Hover="true" Elevation="0">
+                <HeaderContent>
+                    <MudTh>Name</MudTh>
+                    @* Add more headers if you have more properties *@
+                    @* <MudTh>Description</MudTh> *@
+                    <MudTh class="text-right">Actions</MudTh>
+                </HeaderContent>
+
+                <RowTemplate>
+                    <MudTd>
+                        <MudTextField @bind-Value="context.Name"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      FullWidth="true"
+                                      Immediate="true" />
+                    </MudTd>
+
+                    @* Example extra column:
+                    <MudTd>
+                        <MudTextField @bind-Value="context.Description"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense"
+                                      FullWidth="true"
+                                      Immediate="true" />
+                    </MudTd>
+                    *@
+
+                    <MudTd Class="text-right">
+                        <MudIconButton Icon="@Icons.Material.Filled.Save"
+                                       Color="Color.Success"
+                                       Size="Size.Small"
+                                       OnClick="@(()=>UpdateCocktailAsync(context))"
+                                       Title="Save changes" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                       Color="Color.Error"
+                                       Size="Size.Small"
+                                       OnClick="@(()=>DeleteCocktailAsync(context.Id))"
+                                       Title="Delete cocktail" />
+                    </MudTd>
+                </RowTemplate>
+
+                <NoRecordsContent>
+                    <MudText Typo="Typo.body2" Class="pa-4">
+                        No cocktails yet. Add your first one above!
+                    </MudText>
+                </NoRecordsContent>
+            </MudTable>
+        </MudPaper>
+
+    </MudStack>
+</MudPaper>
+
+

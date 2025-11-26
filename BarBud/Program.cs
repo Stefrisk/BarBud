@@ -3,9 +3,9 @@ using MudBlazor.Services;
 using Microsoft.EntityFrameworkCore;
 using BarBud.Db;
 
-using Microsoft.EntityFrameworkCore.SqlServer;
 using BarBud.Models;
 using BarBud.Components.Account;
+using BarBud.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 
@@ -27,6 +27,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<CocktailFunctions>();
 
 builder.Services.AddCascadingAuthenticationState();
 
