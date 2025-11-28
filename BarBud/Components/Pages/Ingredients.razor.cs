@@ -3,6 +3,7 @@ using BarBud.Models;
 using MudBlazor;
 using BarBud.Services;
 
+
 namespace BarBud.Components.Pages;
 
 public partial class Ingredients : ComponentBase
@@ -65,7 +66,7 @@ public partial class Ingredients : ComponentBase
         {
             ["Ingredient"] = ingredient
         };
-
+        //Kolla på detta sen---
         var dialog = DialogService.Show<EditIngredientDialog>("Edit Ingredient", parameters);
         var result = await dialog.Result;
 
