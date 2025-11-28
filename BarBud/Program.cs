@@ -76,6 +76,14 @@ app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-app.MapAdditionalIdentityEndpoints();;
+app.MapAdditionalIdentityEndpoints();
+
+// Apply migrations and seed data
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<BarBudDbContext>();
+    db.Database.Migrate();
+    DbInitializer.Seed(db);
+}
 
 app.Run();
