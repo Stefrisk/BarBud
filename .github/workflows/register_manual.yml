@@ -1,0 +1,32 @@
+name: My dispatchable workflow
+on:  
+  # Allows being triggered with a workflow_dispatch event
+  workflow_dispatch:  
+    inputs:  
+      greeting:  
+        description: The greeting to say
+        required: true  
+        type: string   
+
+  # We define a PR event so that, when we open a PR containing
+  # this workflow, it will be registered and "executed". 
+  # Below, however, we're making sure that jobs will be executed
+  # ONLY if the triggering event is a workflow_dispatch one.
+  pull_request:  
+    branches:  
+      - main  
+    paths:  
+      # Lists this own file to register it in GitHub
+      - .github/workflows/my-workflow.yml # Self
+
+jobs:  
+  my-job:  
+    # Trigger the job only if we are coming from the 
+    # workflow_dispatch event
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "$GREETING"
+        env:
+          GREETING: ${{ inputs.greeting }}
