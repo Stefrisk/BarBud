@@ -17,7 +17,7 @@ on:
       - main  
     paths:  
       # Lists this own file to register it in GitHub
-      - .github/workflows/my-workflow.yml # Self
+      - .github/workflows/register_manual.yml # Self
 
 jobs:  
   my-job:  
