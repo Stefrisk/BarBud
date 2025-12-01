@@ -6,15 +6,15 @@ public static class DbInitializer
 {
     public static void Seed(BarBudDbContext context)
     {
-        // If any cocktails exist, assume already seeded
-        if (context.Cocktails.Any())
+        // If any drinks exist, assume already seeded
+        if (context.Drinks.Any())
         {
             return;
         }
 
-        var cocktails = new List<Cocktail>
+        var cocktails = new List<Drink>
         {
-            new Cocktail
+            new Drink
             {
                 Name = "Old Fashioned",
                 Description = "A classic whiskey cocktail.",
@@ -31,7 +31,7 @@ public static class DbInitializer
                     }
                 }
             },
-            new Cocktail
+            new Drink
             {
                 Name = "Margarita",
                 Description = "Refreshing tequila, lime, and triple sec.",
@@ -48,7 +48,7 @@ public static class DbInitializer
                     }
                 }
             },
-            new Cocktail
+            new Drink
             {
                 Name = "Negroni",
                 Description = "Equal parts gin, Campari, and sweet vermouth.",
@@ -65,7 +65,7 @@ public static class DbInitializer
                     }
                 }
             },
-            new Cocktail
+            new Drink
             {
                 Name = "Mojito",
                 Description = "Minty, lime, and rum highball.",
@@ -83,7 +83,7 @@ public static class DbInitializer
                     }
                 }
             },
-            new Cocktail
+            new Drink
             {
                 Name = "Whiskey Sour",
                 Description = "Balanced sweet and sour whiskey cocktail.",
@@ -102,7 +102,7 @@ public static class DbInitializer
             }
         };
 
-        context.Cocktails.AddRange(cocktails);
+        context.Drinks.AddRange(cocktails);
         context.SaveChanges();
     }
 }

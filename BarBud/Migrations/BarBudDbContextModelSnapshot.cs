@@ -17,7 +17,7 @@ namespace BarBud.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.0");
 
-            modelBuilder.Entity("BarBud.Models.Cocktail", b =>
+            modelBuilder.Entity("BarBud.Models.Drink", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -280,7 +280,7 @@ namespace BarBud.Migrations
 
             modelBuilder.Entity("BarBud.Models.Recipe", b =>
                 {
-                    b.HasOne("BarBud.Models.Cocktail", null)
+                    b.HasOne("BarBud.Models.Drink", null)
                         .WithOne("Recipe")
                         .HasForeignKey("BarBud.Models.Recipe", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -338,7 +338,7 @@ namespace BarBud.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BarBud.Models.Cocktail", b =>
+            modelBuilder.Entity("BarBud.Models.Drink", b =>
                 {
                     b.Navigation("Recipe")
                         .IsRequired();

@@ -28,7 +28,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddRazorPages();
 
-builder.Services.AddScoped<CocktailFunctions>();
+builder.Services.AddScoped<DrinkFunctions>();
 
 builder.Services.AddCascadingAuthenticationState();
 

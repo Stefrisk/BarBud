@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 namespace BarBud.Models
 {
-    public class Cocktail
+    public class Drink
     {
         public int Id { get; set; }
         [Required]

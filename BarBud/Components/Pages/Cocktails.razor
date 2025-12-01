@@ -20,7 +20,7 @@
                 Add a new cocktail
             </MudText>
 
-            <MudForm @ref="form" OnValidSubmit="@(() => AddCocktailsAsync(newCocktail))">
+            <MudForm @ref="form" OnValidSubmit="@(() => AddDrinkAsync(newCocktail))">
                 <MudGrid GutterSize="3">
                     <MudItem xs="12" md="4">
                         <MudTextField @bind-Value="newCocktail.Name"
@@ -75,7 +75,7 @@
                 Your cocktails
             </MudText>
 
-            <MudTable Items="_cocktailsList" Dense="true" Hover="true" Elevation="0">
+            <MudTable Items="_drinkList" Dense="true" Hover="true" Elevation="0">
                 <HeaderContent>
                     <MudTh>Name</MudTh>
                     @* Add more headers if you have more properties *@
@@ -106,19 +106,19 @@
                         <MudIconButton Icon="@Icons.Material.Filled.Save"
                                        Color="Color.Success"
                                        Size="Size.Small"
-                                       OnClick="@(()=>UpdateCocktailAsync(context))"
+                                       OnClick="@(()=>UpdateDrinkAsync(context))"
                                        Title="Save changes" />
                         <MudIconButton Icon="@Icons.Material.Filled.Delete"
                                        Color="Color.Error"
                                        Size="Size.Small"
-                                       OnClick="@(()=>DeleteCocktailAsync(context.Id))"
-                                       Title="Delete cocktail" />
+                                       OnClick="@(()=>DeleteDrinkAsync(context.Id))"
+                                       Title="Delete drink" />
                     </MudTd>
                 </RowTemplate>
 
                 <NoRecordsContent>
                     <MudText Typo="Typo.body2" Class="pa-4">
-                        No cocktails yet. Add your first one above!
+                        No dinks yet. Add your first one above!
                     </MudText>
                 </NoRecordsContent>
             </MudTable>

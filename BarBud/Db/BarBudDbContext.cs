@@ -11,7 +11,7 @@ namespace BarBud.Db
         {
         }
 
-        public DbSet<Cocktail> Cocktails { get; set; }
+        public DbSet<Drink> Drinks { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
 
@@ -21,7 +21,7 @@ namespace BarBud.Db
             base.OnModelCreating(modelBuilder);
 
 
-            modelBuilder.Entity<Cocktail>()
+            modelBuilder.Entity<Drink>()
                 .HasOne(c => c.Recipe)
                 .WithOne()
                 .HasForeignKey<Recipe>(r => r.Id);

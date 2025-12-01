@@ -8,40 +8,40 @@ namespace BarBud.Components.Pages
 {
     public partial class Cocktails : ComponentBase
     {
-        [Inject] private CocktailFunctions CocktailService { get; set; } = null!;
-        private List<Cocktail> _cocktailsList = new();
+        [Inject] private DrinkFunctions DrinkService { get; set; } = null!;
+        private List<Drink> _drinkList = new();
         protected string? ErrorMessage { get; set; }
-        private Cocktail newCocktail = new();
+        private Drink newCocktail = new();
         private MudForm? form;
 
         protected override async Task OnInitializedAsync()
         {
-            await LoadCocktailsAsync();
+            await LoadDrinksAsync();
         }
-        public async Task LoadCocktailsAsync()
+        public async Task LoadDrinksAsync()
         {
-            _cocktailsList = await CocktailService.GetAllCocktailsAsync();
+            _drinkList = await DrinkService.GetAllDrinksAsync();
         }
-        public async Task AddCocktailsAsync(Cocktail newCocktail)
+        public async Task AddDrinkAsync(Drink newDrink)
         {
             ErrorMessage = null;
-            if (string.IsNullOrWhiteSpace(newCocktail.Name))
+            if (string.IsNullOrWhiteSpace(newDrink.Name))
             {
-                ErrorMessage = "Cocktail name cannot is required.";
+                ErrorMessage = "Drink name cannot is required.";
                 return;
             }
-            await CocktailService.AddAsync(newCocktail);
-            await LoadCocktailsAsync();
+            await DrinkService.AddAsync(newDrink);
+            await LoadDrinksAsync();
         }
-        public async Task DeleteCocktailAsync(int id)
+        public async Task DeleteDrinkAsync(int id)
         {
-            await CocktailService.DeleteAsync(id);
-            await LoadCocktailsAsync();
+            await DrinkService.DeleteAsync(id);
+            await LoadDrinksAsync();
         }
-        public async Task UpdateCocktailAsync(Cocktail cocktail)
+        public async Task UpdateDrinkAsync(Drink drink)
         {
-            await CocktailService.UpdateAsync(cocktail);
-            await LoadCocktailsAsync();
+            await DrinkService.UpdateAsync(drink);
+            await LoadDrinksAsync();
         }
     }
 }
