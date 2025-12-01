@@ -12,7 +12,7 @@ public static class DbInitializer
             return;
         }
 
-        var cocktails = new List<Drink>
+        var drinks = new List<Drink>
         {
             new Drink
             {
@@ -102,7 +102,7 @@ public static class DbInitializer
             }
         };
 
-        context.Drinks.AddRange(cocktails);
+        context.Drinks.AddRange(drinks);
         context.SaveChanges();
     }
 }

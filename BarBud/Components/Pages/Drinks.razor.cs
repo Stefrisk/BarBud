@@ -6,12 +6,12 @@ using System.Runtime.CompilerServices;
 
 namespace BarBud.Components.Pages
 {
-    public partial class Cocktails : ComponentBase
+    public partial class Drinks : ComponentBase
     {
         [Inject] private DrinkFunctions DrinkService { get; set; } = null!;
         private List<Drink> _drinkList = new();
         protected string? ErrorMessage { get; set; }
-        private Drink newCocktail = new();
+        private Drink newDrink = new();
         private MudForm? form;
 
         protected override async Task OnInitializedAsync()
