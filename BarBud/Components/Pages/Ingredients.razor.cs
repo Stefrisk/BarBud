@@ -8,7 +8,7 @@ namespace BarBud.Components.Pages;
 
 public partial class Ingredients : ComponentBase
 {
-    [Inject] private IngredientFunctions IngredientService { get; set; } = null;
+    [Inject] private IngredientServices IngredientService { get; set; } = null;
 
     private List<Ingredient> _ingredientsList = new();
     private List<Ingredient> filteredIngredientsList = new();

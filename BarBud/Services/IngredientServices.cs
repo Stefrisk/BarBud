@@ -1,12 +1,14 @@
 ﻿using BarBud.Db;
+using BarBud.Interfaces;
 using BarBud.Models;
 using Microsoft.EntityFrameworkCore;
 namespace BarBud.Services;
 
-public class IngredientFunctions
+public class IngredientServices : IIngredientServices
 {
     private readonly BarBudDbContext _dbContext;
-    public IngredientFunctions(BarBudDbContext db)
+    public BarBudDbContext db { get; set; }
+    public IngredientServices()
     {
         _dbContext = db;
     }
@@ -14,7 +16,7 @@ public class IngredientFunctions
     {
         return await _dbContext.Ingredients.ToListAsync();
     }
-    public async Task<Ingredient?> GetByIdAsync(int id)
+    /*public async Task<Ingredient?> GetByIdAsync(int id)
     {
         return await _dbContext.Ingredients.FindAsync(id);
     }
@@ -22,7 +24,7 @@ public class IngredientFunctions
     {
         if (string.IsNullOrWhiteSpace(name)) return null;
         return await _dbContext.Ingredients.FirstOrDefaultAsync(i => i.Name == name);
-    }
+    }*/
     public async Task<Ingredient> AddAsync(Ingredient ingredient)
     {
         _dbContext.Ingredients.Add(ingredient);

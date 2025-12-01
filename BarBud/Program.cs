@@ -18,7 +18,7 @@ builder.Services.AddDbContext<BarBudDbContext>(options =>
     options.UseSqlite("Data Source=barbud.db"));
 
 // Register IngredientFunctions service
-builder.Services.AddScoped<BarBud.Services.IngredientFunctions>();
+builder.Services.AddScoped<BarBud.Services.IngredientServices>();
 
 
 
@@ -28,7 +28,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddRazorPages();
 
-builder.Services.AddScoped<CocktailFunctions>();
+builder.Services.AddScoped<CocktailServices>();
 
 builder.Services.AddCascadingAuthenticationState();
 

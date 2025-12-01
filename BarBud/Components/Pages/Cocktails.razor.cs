@@ -8,7 +8,7 @@ namespace BarBud.Components.Pages
 {
     public partial class Cocktails : ComponentBase
     {
-        [Inject] private CocktailFunctions CocktailService { get; set; } = null!;
+        [Inject] private CocktailServices CocktailService { get; set; } = null!;
         private List<Cocktail> _cocktailsList = new();
         protected string? ErrorMessage { get; set; }
         private Cocktail newCocktail = new();

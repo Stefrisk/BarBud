@@ -3,11 +3,11 @@ using BarBud.Models;
 using Microsoft.EntityFrameworkCore;
 namespace BarBud.Services
 {
-    public class CocktailFunctions
+    public class CocktailServices
     {
         private readonly BarBudDbContext _dbContext;
 
-        public CocktailFunctions(BarBudDbContext db)
+        public CocktailServices(BarBudDbContext db)
         {
             _dbContext = db;
         }
