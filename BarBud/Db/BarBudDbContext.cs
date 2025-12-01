@@ -21,7 +21,7 @@ namespace BarBud.Db
             base.OnModelCreating(modelBuilder);
 
             // Map Drink to the existing SQLite table name
-            modelBuilder.Entity<Drink>().ToTable("Cocktails");
+            //modelBuilder.Entity<Drink>().ToTable("Cocktails");
 
             modelBuilder.Entity<Drink>()
                 .HasOne(c => c.Recipe)
