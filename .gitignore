@@ -4,6 +4,8 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # User-specific files
+.idea/
+
 *.rsuser
 *.suo
 *.user
@@ -12,6 +14,17 @@
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
+
+# Fody - auto-generated XML schema
+FodyWeavers.xsd
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# JetBrains Rider/IntelliJ IDEA
+.idea/
 
 # Mono auto generated files
 mono_crash.*
@@ -361,3 +374,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/BarBud/barbud.db-shm
+/BarBud/barbud.db-wal

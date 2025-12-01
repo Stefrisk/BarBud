@@ -1,10 +1,13 @@
-﻿namespace BarBud.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BarBud.Models
 {
     public class Ingredient
     {
         public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string? Description { get; set; } = string.Empty;
-        public string? Amount { get; set; } = string.Empty;
+        [Required]
+        public string Name { get; set; }
+        public string? Description { get; set; }
+        public string? Amount { get; set; }
     }
 }

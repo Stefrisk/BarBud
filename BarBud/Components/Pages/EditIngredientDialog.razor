@@ -1,0 +1,24 @@
+﻿@using BarBud.Models
+
+<MudDialog>
+    <DialogContent>
+
+        <MudTextField Label="Name" @bind-Value="Ingredient.Name" Required="true" />
+        <MudTextField Label="Description" @bind-Value="Ingredient.Description" />
+        <MudTextField Label="Amount" @bind-Value="Ingredient.Amount" />
+
+    </DialogContent>
+
+    <DialogActions>
+        <MudButton Color="Color.Primary" OnClick="Save">Save</MudButton>
+        <MudButton Color="Color.Error" OnClick="Cancel">Cancel</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] IMudDialogInstance MudDialog { get; set; } = default!;
+    [Parameter] public Ingredient Ingredient { get; set; } = default!;
+
+    private void Save() => MudDialog.Close(DialogResult.Ok(Ingredient));
+    private void Cancel() => MudDialog.Cancel();
+}

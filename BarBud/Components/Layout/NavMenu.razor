@@ -1,6 +1,27 @@
-﻿
+﻿@inject NavigationManager NavigationManager
+
 <MudNavMenu>
     <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+    <MudNavLink Href="/Ingredients" Icon="@Icons.Material.Filled.FoodBank">Ingredients</MudNavLink>
+    <MudNavLink Href="/Cocktails" Icon="@Icons.Material.Filled.LocalDrink">Cocktails</MudNavLink>
 </MudNavMenu>
 
+@code {
+    private string? currentUrl;
+    protected override void OnInitialized()
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
 
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(e.Location);
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+}
