@@ -66,7 +66,7 @@ public partial class Ingredients : ComponentBase
         {
             ["Ingredient"] = ingredient
         };
-        //Kolla på detta sen---
+        // Kolla pÃ¥ detta sen---
         var dialog = DialogService.Show<EditIngredientDialog>("Edit Ingredient", parameters);
         var result = await dialog.Result;
 
