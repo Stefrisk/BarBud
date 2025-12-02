@@ -1,130 +1,84 @@
-﻿@page "/cocktails"
+﻿@page "/Cocktails"
+@inject IDialogService DialogService
+@using BarBud.Models
 
+@rendermode InteractiveServer
+<MudCard Elevation="6" Class="mb-4 w-100 rounded-lg" Style="background: var(--mud-palette-primary); background: linear-gradient(135deg, var(--mud-palette-primary) 0%, var(--mud-palette-secondary) 100%); overflow: hidden; position: relative;">
+	<div style="position: absolute; top: -30px; right: -30px; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+	<MudCardContent Class="d-flex align-center pa-6">
+		<MudIcon Icon="@Icons.Material.Filled.LocalDrink" Size="Size.Large" Style="color: white; width: 48px; height: 48px;" Class="mr-4" />
+		<div class="d-flex flex-column">
+			<MudText Typo="Typo.h3" Style="color: white; font-weight: 900; letter-spacing: 1px; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">
+				COCKTAILS
+			</MudText>
+			<MudText Typo="Typo.subtitle2" Style="color: rgba(255,255,255,0.85);">
+				Explore and mix your favorite drinks, Don't forget to drink and drive it almost always ends well!
+			</MudText>
+		</div>
+	</MudCardContent>
+	</MudCard>
+	<MudTextField @bind-Value="SearchString" Placeholder="Search cocktails..."
+				  Adornment="Adornment.Start"
+				  AdornmentIcon="@Icons.Material.Filled.Search"
+				  Immediate="true"
+				  Clearable="true"
+			  Class="mb-2"></MudTextField>
+<MudTable Items="@filteredCocktailsList"
+	T="Cocktail"
+	Hover="true"
+	Style="table-layout: fixed; width: 100%;">
+<ColGroup>
+	<col style="width:30%" />
+	<col style="width:50%" />
+	<col style="width:20%" />
+	<col style="width:10%" />
+</ColGroup>
+<HeaderContent>
+	<MudTh>Name</MudTh>
+	<MudTh>Description</MudTh>
+	<MudTh>Recipe</MudTh>
+	<MudTh> </MudTh>
+</HeaderContent>
 
-<MudPaper Class="pa-4" Elevation="3">
-    <MudStack Spacing="3">
+<RowTemplate>
+        @{
+            var cocktail = context;
+        }
+        <MudTd Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor:pointer;"
+               @onclick="() => OnRowClick(cocktail)">
+            @cocktail.Name
+        </MudTd>
+        <MudTd Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor:pointer;"
+		   @onclick="() => OnRowClick(cocktail)">
+		@cocktail.Description
+        </MudTd>
+        <MudTd Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor:pointer;"
+		   @onclick="() => OnRowClick(cocktail)">
+		@cocktail.Recipe
+        </MudTd>
+        <MudTd Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor:pointer;"
+		   @onclick="() => OnRowClick(cocktail)">
+                <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                            Color="Color.Error"
+					   OnClick="async () => await DeleteCocktailAsync(cocktail.Id)" />
+        </MudTd>
+    </RowTemplate>
 
-        <!-- Title & intro -->
-        <MudStack Row="true"  JustifyContent="SpaceBetween">
-            <MudText Typo="Typo.h4">
-                Cocktails
-            </MudText>
-            <MudText Typo="Typo.subtitle2" Class="text-secondary">
-                Manage your BarBud cocktail collection
-            </MudText>
-        </MudStack>
+</MudTable>
 
-        <!-- Add New Cocktail -->
-        <MudPaper Class="pa-4" Elevation="2">
-            <MudText Typo="Typo.h6" GutterBottom="true">
-                Add a new cocktail
-            </MudText>
+<MudCard Outlined="true" elevation="2" class="mt-4" width="400px" height="250px" variant="outlined">
+	<MudCardContent>
+		<MudText>Add another Drink! You alcoholic!</MudText>
+		<MudForm @ref="form">
+			<MudTextField Label="Name" Required="true" @bind-Value="@newCocktail.Name" />
+			<MudTextField Label="Description" @bind-Value="@newCocktail.Description" />
+			<MudTextField Label="Recipe, (not sure what to put here)" @bind-Value="@newCocktail.Recipe" />
+			<MudButton ButtonType="ButtonType.Submit"
+					   Color="Color.Success"
+					   OnClick="@(async() => await AddCocktailsAsync(newCocktail))">Submit</MudButton>
+		</MudForm>
+	</MudCardContent>
+</MudCard>
 
-            <MudForm @ref="form" OnValidSubmit="@(() => AddCocktailsAsync(newCocktail))">
-                <MudGrid GutterSize="3">
-                    <MudItem xs="12" md="4">
-                        <MudTextField @bind-Value="newCocktail.Name"
-                                      Label="Name"
-                                      For="@(() => newCocktail.Name)"
-                                      Required="true"
-                                      RequiredError="Name is required"
-                                      Variant="Variant.Outlined"
-                                      FullWidth="true" />
-                    </MudItem>
-
-                    @* Uncomment / adjust these if your model has these properties *@
-                    @* 
-                    <MudItem xs="12" md="4">
-                        <MudTextField @bind-Value="newCocktail.Description"
-                                      Label="Description"
-                                      Variant="Variant.Outlined"
-                                      FullWidth="true" />
-                    </MudItem>
-
-                    <MudItem xs="12" md="4">
-                        <MudTextField @bind-Value="newCocktail.Ingredients"
-                                      Label="Ingredients"
-                                      Variant="Variant.Outlined"
-                                      FullWidth="true" />
-                    </MudItem>
-                    *@
-
-                    <MudItem xs="12">
-                        <MudStack Row="true" Spacing="2" >
-                            <MudButton Color="Color.Primary"
-                                       Variant="Variant.Filled"
-                                       ButtonType="ButtonType.Submit">
-                                Add Cocktail
-                            </MudButton>
-
-                            @if (!string.IsNullOrWhiteSpace(ErrorMessage))
-                            {
-                                <MudAlert Severity="Severity.Error" Dense="true">
-                                    @ErrorMessage
-                                </MudAlert>
-                            }
-                        </MudStack>
-                    </MudItem>
-                </MudGrid>
-            </MudForm>
-        </MudPaper>
-
-        <!-- Cocktails List -->
-        <MudPaper Class="pa-4" Elevation="2">
-            <MudText Typo="Typo.h6" GutterBottom="true">
-                Your cocktails
-            </MudText>
-
-            <MudTable Items="_cocktailsList" Dense="true" Hover="true" Elevation="0">
-                <HeaderContent>
-                    <MudTh>Name</MudTh>
-                    @* Add more headers if you have more properties *@
-                    @* <MudTh>Description</MudTh> *@
-                    <MudTh class="text-right">Actions</MudTh>
-                </HeaderContent>
-
-                <RowTemplate>
-                    <MudTd>
-                        <MudTextField @bind-Value="context.Name"
-                                      Variant="Variant.Outlined"
-                                      Margin="Margin.Dense"
-                                      FullWidth="true"
-                                      Immediate="true" />
-                    </MudTd>
-
-                    @* Example extra column:
-                    <MudTd>
-                        <MudTextField @bind-Value="context.Description"
-                                      Variant="Variant.Outlined"
-                                      Margin="Margin.Dense"
-                                      FullWidth="true"
-                                      Immediate="true" />
-                    </MudTd>
-                    *@
-
-                    <MudTd Class="text-right">
-                        <MudIconButton Icon="@Icons.Material.Filled.Save"
-                                       Color="Color.Success"
-                                       Size="Size.Small"
-                                       OnClick="@(()=>UpdateCocktailAsync(context))"
-                                       Title="Save changes" />
-                        <MudIconButton Icon="@Icons.Material.Filled.Delete"
-                                       Color="Color.Error"
-                                       Size="Size.Small"
-                                       OnClick="@(()=>DeleteCocktailAsync(context.Id))"
-                                       Title="Delete cocktail" />
-                    </MudTd>
-                </RowTemplate>
-
-                <NoRecordsContent>
-                    <MudText Typo="Typo.body2" Class="pa-4">
-                        No cocktails yet. Add your first one above!
-                    </MudText>
-                </NoRecordsContent>
-            </MudTable>
-        </MudPaper>
-
-    </MudStack>
-</MudPaper>
 
 

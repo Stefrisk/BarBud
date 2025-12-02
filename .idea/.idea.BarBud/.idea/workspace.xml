@@ -10,8 +10,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e92de44c-15cf-4792-9688-22b96ae1d45f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BarBud/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BarBud/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarBud/Components/Pages/Ingredients.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Components/Pages/Ingredients.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BarBud/Components/Pages/Ingredients.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Components/Pages/Ingredients.razor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarBud/Components/Pages/Cocktails.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Components/Pages/Cocktails.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BarBud/Components/Pages/Cocktails.razor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BarBud/Components/Pages/Cocktails.razor.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,12 +39,12 @@
     &quot;assignee&quot;: &quot;antebohman&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Stefrisk/BarBud.git&quot;,
-    &quot;accountId&quot;: &quot;ca0fff7a-21c6-4777-a769-9595b3d9b872&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Stefrisk/BarBud.git",
+    "accountId": "704f30bc-b269-4019-9564-7b62b7d75d82"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/BarBud/.config/dotnet-tools.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///home/stefrisk/RiderProjects/BarBud/BarBud/Components/Pages/Ingredients.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
@@ -62,34 +62,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.BarBud: http.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;ToolWindow.Commit.ShowToolbar&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature-ingredient-page---add-title&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.inline.completion&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.BarBud: http.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "ToolWindow.Commit.ShowToolbar": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "#68-Create-Cocktail-Functions/Frontend",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.inline.completion",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlserver.localdb&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlserver.localdb"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.BarBud: http">
     <configuration name="BarBud: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/BarBud/BarBud.csproj" />
@@ -145,6 +145,7 @@
       <workItem from="1764169297709" duration="3995000" />
       <workItem from="1764178836888" duration="616000" />
       <workItem from="1764192008709" duration="4528000" />
+      <workItem from="1764515523022" duration="699000" />
     </task>
     <task id="LOCAL−00001" summary="#41 - Database - Set up my local database for function testing.">
       <option name="closed" value="true" />
