@@ -32,25 +32,30 @@ public class IngredientPage
     public async Task AddAsync_ShouldAddIngredientToList()
     {
         // Arrange
-        
-        
+        var ingredient = new Ingredient { Name = "grapes", Description = "red" };
+        var mockService = new Mock<IIngredientServices>();
+        mockService.Setup(s => s.AddAsync(It.IsAny<Ingredient>()))
+            .ReturnsAsync(_fakeIngredients)
+            .Callback<Ingredient>(i => _fakeIngredients.Add(i));
+
+
         // Act
-        
-        
+        var result = await mockService.Object.AddAsync(ingredient);
+
         // Assert
-        
+        Assert.Equal(_fakeIngredients, result);
+        Assert.Contains(ingredient.Name, result.Last().Name);
     }
 
     [Fact]
     public async Task Delete_ShouldRemoveIngredientFromList()
     {
         // Arrange
-        
-        
+
+
         // Act
-        
-        
+
+
         // Assert
-        
     }
 }
