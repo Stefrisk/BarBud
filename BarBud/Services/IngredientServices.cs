@@ -7,8 +7,7 @@ namespace BarBud.Services;
 public class IngredientServices : IIngredientServices
 {
     private readonly BarBudDbContext _dbContext;
-    public BarBudDbContext db { get; set; }
-    public IngredientServices()
+    public IngredientServices(BarBudDbContext db)
     {
         _dbContext = db;
     }

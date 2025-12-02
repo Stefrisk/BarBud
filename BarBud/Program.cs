@@ -18,7 +18,7 @@ builder.Services.AddDbContext<BarBudDbContext>(options =>
     options.UseSqlite("Data Source=barbud.db"));
 
 // Register IngredientFunctions service
-builder.Services.AddScoped<BarBud.Services.IngredientFunctions>();
+builder.Services.AddScoped<BarBud.Services.IngredientServices>();
 
 
 
