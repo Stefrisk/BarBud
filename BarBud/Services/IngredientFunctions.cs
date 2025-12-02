@@ -24,14 +24,12 @@ public class IngredientFunctions : IIngredientServices
         if (string.IsNullOrWhiteSpace(name)) return null;
         return await _dbContext.Ingredients.FirstOrDefaultAsync(i => i.Name == name);
     }*/
-    public async Task<Ingredient> AddAsync(Ingredient ingredient)
+    public async Task<List<Ingredient>> AddAsync(Ingredient ingredient)
     {
         _dbContext.Ingredients.Add(ingredient);
         await _dbContext.SaveChangesAsync();
-
-        await GetAllIngredientsAsync();
         
-        return ingredient;
+        return await GetAllIngredientsAsync();
     }
     public async Task<bool> DeleteAsync(int id) 
     {
