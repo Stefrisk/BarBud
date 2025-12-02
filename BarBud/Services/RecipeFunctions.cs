@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BarBud.Services
 {
-    public class RecipeServices
+    public class RecipeFunctions
     {
         private readonly BarBudDbContext _dbContext;
 
-        public RecipeServices(BarBudDbContext db)
+        public RecipeFunctions(BarBudDbContext db)
         {
             _dbContext = db;
         }

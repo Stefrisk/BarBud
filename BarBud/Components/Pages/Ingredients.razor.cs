@@ -8,7 +8,7 @@ namespace BarBud.Components.Pages;
 
 public partial class Ingredients : ComponentBase
 {
-    [Inject] private IngredientServices IngredientService { get; set; } = null;
+    [Inject] private IngredientFunctions IngredientFunction { get; set; } = null;
 
     private List<Ingredient> _ingredientsList = new();
     private List<Ingredient> filteredIngredientsList = new();
@@ -41,7 +41,7 @@ public partial class Ingredients : ComponentBase
 
     private async Task LoadIngredientsAsync()
     {
-        _ingredientsList = await IngredientService.GetAllIngredientsAsync();
+        _ingredientsList = await IngredientFunction.GetAllIngredientsAsync();
     }
 
     private async Task AddIngredientAsync(Ingredient newIngredient)
@@ -55,7 +55,7 @@ public partial class Ingredients : ComponentBase
         }
 
 
-        await IngredientService.AddAsync(newIngredient);
+        await IngredientFunction.AddAsync(newIngredient);
 
         await LoadIngredientsAsync();
     }
@@ -74,15 +74,15 @@ public partial class Ingredients : ComponentBase
         {
             var updated = (Ingredient)result.Data!;
 
-            await IngredientService.UpdateAsync(updated);
+            await IngredientFunction.UpdateAsync(updated);
 
-            _ingredientsList = await IngredientService.GetAllIngredientsAsync();
+            _ingredientsList = await IngredientFunction.GetAllIngredientsAsync();
         }
     }
 
     protected async Task DeleteIngredientAsync(int id)
     {
-        await IngredientService.DeleteAsync(id);
+        await IngredientFunction.DeleteAsync(id);
 
         await LoadIngredientsAsync();
         filteredIngredientsList = _ingredientsList;

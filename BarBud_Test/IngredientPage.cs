@@ -1,19 +1,12 @@
 ﻿using BarBud.Interfaces;
 using BarBud.Services;
 using BarBud.Models;
+using Moq;
 
 namespace BarBud_Test;
 
 public class IngredientPage
 {
-    private readonly IIngredientServices _ingredientServices = new IngredientServices();
-    public IIngredientServices sut { get; set; }
-
-    public IngredientPage()
-    {
-        sut = _ingredientServices;
-    }
-
     private List<Ingredient> _fakeIngredients = new()
     {
         new Ingredient { Name = "Rum", Description = "light" },
@@ -22,15 +15,42 @@ public class IngredientPage
     };
 
     [Fact]
-    public void Delete_ShouldRemoveItemFromList()
+    public async Task GetAllIngredients_ShouldReturnAllIngredients()
     {
         // Arrange
-        var ingredient = _fakeIngredients[0].Id;
+        var mockService = new Mock<IIngredientServices>();
+        mockService.Setup(s => s.GetAllIngredientsAsync()).ReturnsAsync(_fakeIngredients);
 
         // Act
-        sut.DeleteAsync(ingredient);
+        var result = await mockService.Object.GetAllIngredientsAsync();
 
         // Assert
-        Assert.DoesNotContain(_fakeIngredients, i => i.Id == ingredient);
+        Assert.Equal(_fakeIngredients, result);
+    }
+
+    [Fact]
+    public async Task AddAsync_ShouldAddIngredientToList()
+    {
+        // Arrange
+        
+        
+        // Act
+        
+        
+        // Assert
+        
+    }
+
+    [Fact]
+    public async Task Delete_ShouldRemoveIngredientFromList()
+    {
+        // Arrange
+        
+        
+        // Act
+        
+        
+        // Assert
+        
     }
 }

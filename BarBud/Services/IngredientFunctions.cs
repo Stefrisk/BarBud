@@ -4,10 +4,10 @@ using BarBud.Models;
 using Microsoft.EntityFrameworkCore;
 namespace BarBud.Services;
 
-public class IngredientServices : IIngredientServices
+public class IngredientFunctions : IIngredientServices
 {
     private readonly BarBudDbContext _dbContext;
-    public IngredientServices(BarBudDbContext db)
+    public IngredientFunctions(BarBudDbContext db)
     {
         _dbContext = db;
     }
