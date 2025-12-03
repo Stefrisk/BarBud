@@ -7,6 +7,6 @@ namespace BarBud.Models
         [Required]
         public string Name { get; set; } 
         public string? Description { get; set; } 
-        public Recipe Recipe { get; set; } 
+       public Recipe Recipe { get; set; } 
     }
 }
