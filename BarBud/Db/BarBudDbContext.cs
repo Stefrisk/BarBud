@@ -38,7 +38,7 @@ namespace BarBud.Db
             modelBuilder.Entity<RecipeIngredient>().
                 HasOne(ri => ri.Ingredient)
                 .WithMany(i => i.RecipeIngredients)
-                .HasForeignKey(ri => ri.IngredientId).  
+                .HasForeignKey(ri => ri.IngredientId).
                 OnDelete(DeleteBehavior.Restrict);
 
             // -----------------------------
