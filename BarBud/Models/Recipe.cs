@@ -5,6 +5,8 @@ namespace BarBud.Models;
 public class Recipe
 {
     public int Id { get; set; }
+    [Required]
+    public string Name { get; set; } = string.Empty;
 
     [Required]
     public required Drink Drink { get; set; }

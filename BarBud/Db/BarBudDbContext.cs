@@ -14,25 +14,55 @@ namespace BarBud.Db
         public DbSet<Drink> Drinks { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<RecipeIngredient> RecipeIngredients => Set<RecipeIngredient>();
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Map Drink to the existing SQLite table name
-            //modelBuilder.Entity<Drink>().ToTable("Cocktails");
+            modelBuilder.Entity<Recipe>()
+                .HasOne(r => r.Drink)
+                .WithMany(d => d.Recipes)
+                .HasForeignKey(r => r.DrinkId);
 
+            modelBuilder.Entity<RecipeIngredient>().
+                HasKey(ri => new { ri.RecipeId, ri.IngredientId });
+
+            modelBuilder.Entity<RecipeIngredient>().
+                HasOne(ri => ri.Recipe)
+                .WithMany(r => r.Ingredients)
+                .HasForeignKey(ri => ri.RecipeId).
+                OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RecipeIngredient>().
+                HasOne(ri => ri.Ingredient)
+                .WithMany(i => i.RecipeIngredients)
+                .HasForeignKey(ri => ri.IngredientId).  
+                OnDelete(DeleteBehavior.Restrict);
+
+            // -----------------------------
+            // Property Constraints
+            // -----------------------------
             modelBuilder.Entity<Drink>()
-                .HasOne(c => c.Recipe)
-                .WithOne()
-                .HasForeignKey<Recipe>(r => r.Id);
-
+                .Property(d => d.Name)
+                .IsRequired()
+                .HasMaxLength(256);
 
             modelBuilder.Entity<Recipe>()
-                .HasMany(r => r.Ingredients)
-                .WithOne()
-                .HasForeignKey("RecipeId");
+                .Property(r => r.Name)
+                .IsRequired()
+                .HasMaxLength(256);
+
+            modelBuilder.Entity<Ingredient>()
+                .Property(i => i.Name)
+                .IsRequired()
+                .HasMaxLength(256);
+
+            modelBuilder.Entity<RecipeIngredient>()
+                .Property(ri => ri.Quantity)
+                .IsRequired()
+                .HasPrecision(10, 2); // Avoids float garbage
         }
     }
 }
