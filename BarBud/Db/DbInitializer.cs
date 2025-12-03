@@ -18,16 +18,20 @@ public static class DbInitializer
             {
                 Name = "Old Fashioned",
                 Description = "A classic whiskey cocktail.",
-                Recipe = new Recipe
+                Recipes = new List<Recipe>
                 {
-                    Name = "Old Fashioned Recipe",
-                    Instructions = "Muddle sugar with bitters, add whiskey and ice, stir, garnish with orange peel.",
-                    Ingredients = new List<Ingredient>
+                    new Recipe
                     {
-                        new Ingredient { Name = "Bourbon", Amount = "2 oz" },
-                        new Ingredient { Name = "Angostura Bitters", Amount = "2 dashes" },
-                        new Ingredient { Name = "Sugar Cube", Amount = "1 cube" },
-                        new Ingredient { Name = "Orange Peel", Amount = "Garnish" }
+                        Name = "Old Fashioned Recipe",
+                        Instructions = "Muddle sugar with bitters, add whiskey and ice, stir, garnish with orange peel.",
+                        Ingredients = new List<RecipeIngredient>
+                        {
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Bourbon"}, Quantity = 2, Unit = "oz" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Angostura Bitters" }, Quantity = 2, Unit = "dashes" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Sugar Cube" }, Quantity = 1, Unit = "cube" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Orange Peel" }, Quantity = 1, Unit = "garnish"  }
+                        },
+                        Drink = null! // Will be set below
                     }
                 }
             },
@@ -35,16 +39,20 @@ public static class DbInitializer
             {
                 Name = "Margarita",
                 Description = "Refreshing tequila, lime, and triple sec.",
-                Recipe = new Recipe
+                Recipes = new List<Recipe>
                 {
-                    Name = "Margarita Recipe",
-                    Instructions = "Shake tequila, lime juice, and triple sec with ice, strain into salt-rimmed glass.",
-                    Ingredients = new List<Ingredient>
+                    new Recipe
                     {
-                        new Ingredient { Name = "Tequila", Amount = "2 oz" },
-                        new Ingredient { Name = "Lime Juice", Amount = "1 oz" },
-                        new Ingredient { Name = "Triple Sec", Amount = "1 oz" },
-                        new Ingredient { Name = "Salt", Amount = "Rim" }
+                        Name = "Margarita Recipe",
+                        Instructions = "Shake tequila, lime juice, and triple sec with ice, strain into salt-rimmed glass.",
+                        Ingredients = new List<RecipeIngredient>
+                        {
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Tequila" }, Quantity = 2, Unit = "oz" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Lime Juice" }, Quantity = 1, Unit = "oz" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Triple Sec" }, Quantity = 1, Unit = "oz" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Salt" }, Quantity = 1, Unit = "Rim" }
+                        },
+                        Drink = null!
                     }
                 }
             },
@@ -52,16 +60,20 @@ public static class DbInitializer
             {
                 Name = "Negroni",
                 Description = "Equal parts gin, Campari, and sweet vermouth.",
-                Recipe = new Recipe
+                Recipes = new List<Recipe>
                 {
-                    Name = "Negroni Recipe",
-                    Instructions = "Stir ingredients with ice, strain, garnish with orange slice.",
-                    Ingredients = new List<Ingredient>
+                    new Recipe
                     {
-                        new Ingredient { Name = "Gin", Amount = "1 oz" },
-                        new Ingredient { Name = "Campari", Amount = "1 oz" },
-                        new Ingredient { Name = "Sweet Vermouth", Amount = "1 oz" },
-                        new Ingredient { Name = "Orange Slice", Amount = "Garnish" }
+                        Name = "Negroni Recipe",
+                        Instructions = "Stir ingredients with ice, strain, garnish with orange slice.",
+                        Ingredients = new List<RecipeIngredient>
+                        {
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Gin" }, Quantity = 1, Unit = "oz" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Campari" }, Quantity = 1, Unit = "oz" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Sweet Vermouth" }, Quantity = 1, Unit = "oz" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Orange Slice" }, Quantity = 1, Unit = "garnish" }
+                        },
+                        Drink = null!
                     }
                 }
             },
@@ -69,17 +81,21 @@ public static class DbInitializer
             {
                 Name = "Mojito",
                 Description = "Minty, lime, and rum highball.",
-                Recipe = new Recipe
+                Recipes = new List<Recipe>
                 {
-                    Name = "Mojito Recipe",
-                    Instructions = "Muddle mint with sugar and lime, add rum and soda, gently stir.",
-                    Ingredients = new List<Ingredient>
+                    new Recipe
                     {
-                        new Ingredient { Name = "White Rum", Amount = "2 oz" },
-                        new Ingredient { Name = "Fresh Mint", Amount = "8 leaves" },
-                        new Ingredient { Name = "Lime Juice", Amount = "1 oz" },
-                        new Ingredient { Name = "Sugar", Amount = "2 tsp" },
-                        new Ingredient { Name = "Soda Water", Amount = "Top" }
+                        Name = "Mojito Recipe",
+                        Instructions = "Muddle mint with sugar and lime, add rum and soda, gently stir.",
+                        Ingredients = new List<RecipeIngredient>
+                        {
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "White Rum" }, Quantity = 2, Unit = "oz" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Fresh Mint" }, Quantity = 8, Unit = "leaves" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Lime Juice" }, Quantity = 1, Unit = "oz" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Sugar" }, Quantity = 2, Unit = "tsp" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Soda Water" }, Quantity = 1, Unit = "Top" }
+                        },
+                        Drink = null!
                     }
                 }
             },
@@ -87,20 +103,36 @@ public static class DbInitializer
             {
                 Name = "Whiskey Sour",
                 Description = "Balanced sweet and sour whiskey cocktail.",
-                Recipe = new Recipe
+                Recipes = new List<Recipe>
                 {
-                    Name = "Whiskey Sour Recipe",
-                    Instructions = "Shake whiskey, lemon, and syrup with ice, strain, optionally add egg white.",
-                    Ingredients = new List<Ingredient>
+                    new Recipe
                     {
-                        new Ingredient { Name = "Bourbon", Amount = "2 oz" },
-                        new Ingredient { Name = "Lemon Juice", Amount = "3/4 oz" },
-                        new Ingredient { Name = "Simple Syrup", Amount = "1/2 oz" },
-                        new Ingredient { Name = "Egg White", Amount = "Optional" }
+                        Name = "Whiskey Sour Recipe",
+                        Instructions = "Shake whiskey, lemon, and syrup with ice, strain, optionally add egg white.",
+                        Ingredients = new List<RecipeIngredient>
+                        {
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Bourbon" }, Quantity = 2, Unit = "oz" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Lemon Juice" }, Quantity = 0.75m, Unit = "oz" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Simple Syrup" }, Quantity = 0.5m, Unit = "oz" },
+                            new RecipeIngredient { Ingredient = new Ingredient { Name = "Egg White" }, Quantity = 1, Unit = "Optional" }
+                        },
+                        Drink = null!
                     }
                 }
             }
         };
+
+        // Set the Drink property for each Recipe
+        foreach (var drink in drinks)
+        {
+            if (drink.Recipes != null)
+            {
+                foreach (var recipe in drink.Recipes)
+                {
+                    recipe.Drink = drink;
+                }
+            }
+        }
 
         context.Drinks.AddRange(drinks);
         context.SaveChanges();

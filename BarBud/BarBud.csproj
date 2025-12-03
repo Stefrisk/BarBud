@@ -7,10 +7,6 @@
   </PropertyGroup>
    
   <ItemGroup>
-    <Compile Remove="Db\DbInitializer.cs" />
-  </ItemGroup>
-   
-  <ItemGroup>
     <None Remove="barbud.db-shm" />
     <None Remove="barbud.db-wal" />
   </ItemGroup>
