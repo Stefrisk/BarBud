@@ -57,7 +57,7 @@
         </MudTd>
         <MudTd Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor:pointer;"
                @onclick="() => OnRowClick(ingredient)">
-            @ingredient.Amount
+@*             @ingredient.Amount *@
         </MudTd>
         <MudTd Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor:pointer;"
                 @onclick="() => OnRowClick(ingredient)">
@@ -75,7 +75,7 @@
         <MudForm @ref="form">
             <MudTextField Label="Name" Required="true" @bind-Value="@NewIngredient.Name" />
             <MudTextField Label="Description" @bind-Value="@NewIngredient.Description" />
-            <MudTextField Label="Amount" @bind-Value="@NewIngredient.Amount" />
+            @* <MudTextField Label="Amount" @bind-Value="@NewIngredient.Amount" /> *@
             <MudButton ButtonType="ButtonType.Submit"
                        Color="Color.Success"
                        OnClick="@(async() => await AddIngredientAsync(NewIngredient))">Submit</MudButton>
