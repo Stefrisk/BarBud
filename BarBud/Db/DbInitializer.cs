@@ -123,14 +123,11 @@ public static class DbInitializer
         };
 
         // Set the Drink property for each Recipe
-        foreach (var drink in drinks)
+        foreach (var drink in drinks.Where(d => d.Recipes != null))
         {
-            if (drink.Recipes != null)
+            foreach (var recipe in drink.Recipes)
             {
-                foreach (var recipe in drink.Recipes)
-                {
-                    recipe.Drink = drink;
-                }
+                recipe.Drink = drink;
             }
         }
 
