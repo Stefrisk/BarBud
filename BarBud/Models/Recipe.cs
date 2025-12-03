@@ -9,8 +9,8 @@ public class Recipe
     public string Name { get; set; } = string.Empty;
 
     [Required]
-    public required Drink Drink { get; set; }
     public int DrinkId { get; set; }
+    public required Drink Drink { get; set; }
     public ICollection<RecipeIngredient> Ingredients { get; set; } = new List<RecipeIngredient>();
     public string Instructions { get; set; } = string.Empty;
 }
