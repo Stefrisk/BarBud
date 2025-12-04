@@ -9,9 +9,9 @@ public class IngredientPage
 {
     private List<Ingredient> _fakeIngredients = new()
     {
-        new Ingredient { Name = "Rum", Description = "light" },
-        new Ingredient { Name = "Pomegranate", Description = "lots of seeds" },
-        new Ingredient { Name = "Grenadine", Description = "red" }
+        new Ingredient { Id = 1 , Name = "Rum", Description = "light" },
+        new Ingredient {Id = 2, Name = "Pomegranate", Description = "lots of seeds" },
+        new Ingredient {Id = 3, Name = "Grenadine", Description = "red" }
     };
 
     [Fact]
@@ -51,11 +51,24 @@ public class IngredientPage
     public async Task Delete_ShouldRemoveIngredientFromList()
     {
         // Arrange
-
-
+        var id = 1;
+        var mockService = new Mock<IIngredientServices>();
+        mockService.Setup(s => s.DeleteAsync(It.IsAny<Int32>()))
+            .ReturnsAsync(_fakeIngredients)
+            .Callback<Int32>(id => _fakeIngredients.RemoveAll(i => i.Id == id));
         // Act
-
+        var result = await mockService.Object.DeleteAsync(id);
 
         // Assert
+        Assert.DoesNotContain(id, result.Select(i => i.Id));
+    }
+
+    public async Task UpdateAsync_ShouldUpdateIngredientInList()
+    {
+        // Arrange
+
+        //act
+
+        //assert
     }
 }

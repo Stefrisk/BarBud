@@ -31,14 +31,14 @@ public class IngredientFunctions : IIngredientServices
         
         return await GetAllIngredientsAsync();
     }
-    public async Task<bool> DeleteAsync(int id) 
+    public async Task<List<Ingredient>> DeleteAsync(int id)
     {
         var ingredient = await _dbContext.Ingredients.FindAsync(id);
-        if (ingredient == null) return false;
+        if (ingredient == null) return await GetAllIngredientsAsync();
 
         _dbContext.Ingredients.Remove(ingredient);
         await _dbContext.SaveChangesAsync();
-        return true;
+        return await GetAllIngredientsAsync();
 
     }
     public async Task<bool> UpdateAsync(Ingredient ingredient)
