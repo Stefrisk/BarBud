@@ -1,9 +1,10 @@
 ﻿using BarBud.Db;
+using BarBud.Interfaces;
 using BarBud.Models;
 using Microsoft.EntityFrameworkCore;
 namespace BarBud.Services
 {
-    public class DrinkFunctions
+    public class DrinkFunctions : IDrinkServices
     {
         private readonly BarBudDbContext _dbContext;
 
@@ -24,11 +25,11 @@ namespace BarBud.Services
             if (string.IsNullOrWhiteSpace(name)) return null;
             return await _dbContext.Drinks.FirstOrDefaultAsync(c => c.Name == name);
         }
-        public async Task<Drink> AddAsync(Drink drink)
+        public async Task<List<Drink>> AddAsync(Drink drink)
         {
             _dbContext.Drinks.Add(drink);
             await _dbContext.SaveChangesAsync();
-            return drink;
+            return await GetAllDrinksAsync();
         }
         public async Task<bool> DeleteAsync(int id)
         {
