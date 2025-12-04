@@ -10,6 +10,7 @@ namespace BarBud.Components.Pages
     {
         [Inject] private DrinkFunctions DrinkService { get; set; } = null!;
         private List<Drink> _drinkList = new();
+       private List<Drink> filteredDrinkList = new();
         protected string? ErrorMessage { get; set; }
         private Drink newDrink = new();
         private MudForm? form;
@@ -37,11 +38,16 @@ namespace BarBud.Components.Pages
         {
             await DrinkService.DeleteAsync(id);
             await LoadDrinksAsync();
+            _drinkList = await DrinkService.GetAllDrinksAsync();
+
+
         }
         public async Task UpdateDrinkAsync(Drink drink)
         {
             await DrinkService.UpdateAsync(drink);
             await LoadDrinksAsync();
+            filteredDrinkList = _drinkList;
+
         }
     }
 }
