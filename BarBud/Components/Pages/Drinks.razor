@@ -1,5 +1,6 @@
 ﻿@page "/drinks"
-
+@inject IDialogService DialogService
+@using BarBud.Models
 <MudPaper Class="pa-4" Elevation="3">
     <MudStack Spacing="3">
 
@@ -19,9 +20,7 @@
                 Add a new drink
             </MudText>
 
-            <MudForm @ref="form"
-                     OnValidSubmit="AddDrinkAsync"
-                     OnInvalidSubmit="OnInvalidSubmit">
+            <MudForm @ref="form">
                 <MudGrid GutterSize="3">
                     <MudItem xs="12" md="4">
                         <MudTextField @bind-Value="newDrinkName"
@@ -37,7 +36,8 @@
                         <MudStack Row="true" Spacing="2">
                             <MudButton Color="Color.Primary"
                                        Variant="Variant.Filled"
-                                       ButtonType="ButtonType.Submit">
+                                       ButtonType="ButtonType.Submit"
+                                       OnClick="@(async() => await AddDrinkAsync(newDrink))">
                                 Add Drink
                             </MudButton>
 

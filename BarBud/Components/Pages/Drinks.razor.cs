@@ -9,6 +9,7 @@ namespace BarBud.Components.Pages
     {
         [Inject] private DrinkFunctions DrinkService { get; set; } = null!;
         private List<Drink> _drinkList = new();
+       private List<Drink> filteredDrinkList = new();
         protected string? ErrorMessage { get; set; }
         // Bind input to a simple value to avoid constructing an invalid Drink
         private string newDrinkName = string.Empty;
@@ -61,12 +62,17 @@ namespace BarBud.Components.Pages
         {
             await DrinkService.DeleteAsync(id);
             await LoadDrinksAsync();
+            _drinkList = await DrinkService.GetAllDrinksAsync();
+
+
         }
 
         public async Task UpdateDrinkAsync(Drink drink)
         {
             await DrinkService.UpdateAsync(drink);
             await LoadDrinksAsync();
+            filteredDrinkList = _drinkList;
+
         }
 
         private void OnInvalidSubmit()
