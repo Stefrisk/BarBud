@@ -6,6 +6,7 @@ using BarBud.Db;
 using BarBud.Models;
 using BarBud.Components.Account;
 using BarBud.Services;
+using BarBud.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 
@@ -17,18 +18,16 @@ builder.Services.AddMudServices();
 builder.Services.AddDbContext<BarBudDbContext>(options =>
     options.UseSqlite("Data Source=barbud.db"));
 
-// Register IngredientFunctions service
-builder.Services.AddScoped<BarBud.Services.IngredientFunctions>();
-
-
-
 // Add services to the container.
+builder.Services.AddScoped<IIngredientServices, IngredientFunctions>();
+builder.Services.AddScoped<IDrinkServices, DrinkFunctions>();
+builder.Services.AddScoped<IRecipeFunctions, RecipeFunctions>();
+
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddRazorPages();
 
-builder.Services.AddScoped<DrinkFunctions>();
 
 builder.Services.AddCascadingAuthenticationState();
 
