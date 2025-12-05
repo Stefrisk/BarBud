@@ -63,12 +63,32 @@ public class IngredientPage
         Assert.DoesNotContain(id, result.Select(i => i.Id));
     }
 
+    [Fact]
     public async Task UpdateAsync_ShouldUpdateIngredientInList()
     {
         // Arrange
+        var updatedIngredient = new Ingredient { Id = 1, Name = "White Rum", Description = "clear" };
 
-        //act
+        var mockService = new Mock<IIngredientServices>();
+        mockService.Setup(s => s.UpdateAsync(It.IsAny<Ingredient>()))
+            .ReturnsAsync(_fakeIngredients)
+            .Callback<Ingredient>(i =>
+            {
+                var existing = _fakeIngredients.FirstOrDefault(x => x.Id == i.Id);
+                if (existing != null)
+                {
+                    existing.Name = i.Name;
+                    existing.Description = i.Description;
+                }
+            });
 
-        //assert
+        // Act
+        var result = await mockService.Object.UpdateAsync(updatedIngredient);
+
+
+        // Assert
+        var updated = result.First(i => i.Id == 1);
+        
+        Assert.Equal(updated.Name, _fakeIngredients.First(i => i.Id == 1).Name);
     }
 }

@@ -7,5 +7,5 @@ public interface IIngredientServices
     public Task<List<Ingredient>> GetAllIngredientsAsync();
     public Task<List<Ingredient>> AddAsync(Ingredient ingredient);
     public Task<List<Ingredient>> DeleteAsync(int id);
-    public Task<bool> UpdateAsync(Ingredient ingredient);
+    public Task<List<Ingredient>> UpdateAsync(Ingredient ingredient);
 }

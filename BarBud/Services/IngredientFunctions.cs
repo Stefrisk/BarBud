@@ -41,12 +41,12 @@ public class IngredientFunctions : IIngredientServices
         return await GetAllIngredientsAsync();
 
     }
-    public async Task<bool> UpdateAsync(Ingredient ingredient)
+    public async Task<List<Ingredient>> UpdateAsync(Ingredient ingredient)
     {
       var exists = await _dbContext.Ingredients.AnyAsync(i => i.Id == ingredient.Id);
-        if (!exists) return false;
+        if (!exists) return await GetAllIngredientsAsync();
         _dbContext.Ingredients.Update(ingredient);
         await _dbContext.SaveChangesAsync();
-        return true;
+        return await GetAllIngredientsAsync();
     }
 }
