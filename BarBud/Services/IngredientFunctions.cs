@@ -27,8 +27,6 @@ public class IngredientFunctions
     {
         _dbContext.Ingredients.Add(ingredient);
         await _dbContext.SaveChangesAsync();
-
-        await GetAllIngredientsAsync();
         
         return ingredient;
     }
