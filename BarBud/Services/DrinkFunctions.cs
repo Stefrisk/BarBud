@@ -20,6 +20,14 @@ namespace BarBud.Services
         {
             return await _dbContext.Drinks.FindAsync(id);
         }
+        public async Task<Drink?> GetDetailsByIdAsync(int id)
+        {
+            return await _dbContext.Drinks
+                .Include(d => d.Recipes)
+                    .ThenInclude(r => r.Ingredients)
+                        .ThenInclude(ri => ri.Ingredient)
+                .FirstOrDefaultAsync(d => d.Id == id);
+        }
         public async Task<Drink?> GetByNameAsync(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) return null;

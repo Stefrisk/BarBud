@@ -1,0 +1,79 @@
+﻿@page "/drinks/{id:int}"
+@using BarBud.Models
+@inject BarBud.Services.DrinkFunctions DrinkService
+
+<h3>Drink details</h3>
+
+<MudPaper Class="pa-4" Elevation="3">
+    <MudStack Spacing="3">
+        @if (loading)
+        {
+            <MudProgressCircular Class="ma-4" />
+        }
+        else if (drink is null)
+        {
+            <MudAlert Severity="Severity.Error">
+                Drink not found.
+            </MudAlert>
+        }
+        else
+        {
+            <MudStack Row="true" JustifyContent="SpaceBetween">
+                <MudText Typo="Typo.h4">@drink.Name</MudText>
+                <MudButton Variant="Variant.Outlined" Color="Color.Primary" Href="/drinks">Back to list</MudButton>
+            </MudStack>
+
+            @if (!string.IsNullOrWhiteSpace(drink.Description))
+            {
+                <MudText Typo="Typo.body1">@drink.Description</MudText>
+            }
+
+            <MudTabs>
+                <MudTabPanel Text="Overview">
+                    <MudText Typo="Typo.subtitle1">Recipes</MudText>
+                    @if (drink.Recipes is null || drink.Recipes.Count == 0)
+                    {
+                        <MudText>No recipes added yet.</MudText>
+                    }
+                    else
+                    {
+                        @foreach (var r in drink.Recipes)
+                        {
+                            <MudPaper Class="pa-3 mt-3" Elevation="1">
+                                <MudText Typo="Typo.h6">@r.Name</MudText>
+                                @if (!string.IsNullOrWhiteSpace(r.Instructions))
+                                {
+                                    <MudAlert Severity="Severity.Info" Dense="true">@r.Instructions</MudAlert>
+                                }
+                                <MudTable Items="r.Ingredients" Dense="true" Hover="true">
+                                    <HeaderContent>
+                                        <MudTh>Ingredient</MudTh>
+                                        <MudTh class="text-right">Amount</MudTh>
+                                    </HeaderContent>
+                                    <RowTemplate>
+                                        <MudTd>@context.Ingredient?.Name</MudTd>
+                                        <MudTd Class="text-right">@($@"{context.Quantity:0.##} {context.Unit}")</MudTd>
+                                    </RowTemplate>
+                                </MudTable>
+                            </MudPaper>
+                        }
+                    }
+                </MudTabPanel>
+            </MudTabs>
+        }
+    </MudStack>
+</MudPaper>
+
+@code {
+    [Parameter] public int id { get; set; }
+
+    private Drink? drink;
+    private bool loading = true;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        loading = true;
+        drink = await DrinkService.GetDetailsByIdAsync(id);
+        loading = false;
+    }
+}

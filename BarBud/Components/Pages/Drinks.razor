@@ -14,7 +14,7 @@
             </MudText>
         </MudStack>
 
-        <!-- Add New Drink -->
+        <!-- Add New Drink (minimal: name only) -->
         <MudPaper Class="pa-4" Elevation="2">
             <MudText Typo="Typo.h6" GutterBottom="true">
                 Add a new drink
@@ -23,9 +23,9 @@
             <MudForm @ref="form">
                 <MudGrid GutterSize="3">
                     <MudItem xs="12" md="4">
-                        <MudTextField @bind-Value="newDrink.Name"
+                        <MudTextField @bind-Value="newDrinkName"
                                       Label="Name"
-                                      For="@(() => newDrink.Name)"
+                                      For="@(() => newDrinkName)"
                                       Required="true"
                                       RequiredError="Name is required"
                                       Variant="Variant.Outlined"
@@ -33,7 +33,7 @@
                     </MudItem>
 
                     <MudItem xs="12">
-                        <MudStack Row="true" Spacing="2" >
+                        <MudStack Row="true" Spacing="2">
                             <MudButton Color="Color.Primary"
                                        Variant="Variant.Filled"
                                        ButtonType="ButtonType.Submit"
@@ -51,6 +51,10 @@
                     </MudItem>
                 </MudGrid>
             </MudForm>
+
+            <MudButton Color="Color.Secondary" Variant="Variant.Outlined" OnClick="AddDrinkAsync">
+                Debug: Add without form
+            </MudButton>
         </MudPaper>
 
         <!-- Drink List -->
@@ -62,8 +66,7 @@
             <MudTable Items="_drinkList" Dense="true" Hover="true" Elevation="0">
                 <HeaderContent>
                     <MudTh>Name</MudTh>
-                    @* Add more headers if you have more properties *@
-                    @* <MudTh>Description</MudTh> *@
+                    <MudTh>Details</MudTh>
                     <MudTh class="text-right">Actions</MudTh>
                 </HeaderContent>
 
@@ -75,16 +78,9 @@
                                       FullWidth="true"
                                       Immediate="true" />
                     </MudTd>
-
-                    @* Example extra column:
                     <MudTd>
-                        <MudTextField @bind-Value="context.Description"
-                                      Variant="Variant.Outlined"
-                                      Margin="Margin.Dense"
-                                      FullWidth="true"
-                                      Immediate="true" />
+                        <MudButton Variant="Variant.Text" Color="Color.Primary" Href="@($"/drinks/{context.Id}")">View</MudButton>
                     </MudTd>
-                    *@
 
                     <MudTd Class="text-right">
                         <MudIconButton Icon="@Icons.Material.Filled.Save"
