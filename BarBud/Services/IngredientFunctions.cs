@@ -15,7 +15,7 @@ public class IngredientFunctions : IIngredientServices
     {
         return await _dbContext.Ingredients.ToListAsync();
     }
-    /*public async Task<Ingredient?> GetByIdAsync(int id)
+    public async Task<Ingredient?> GetByIdAsync(int id)
     {
         return await _dbContext.Ingredients.FindAsync(id);
     }
@@ -23,7 +23,7 @@ public class IngredientFunctions : IIngredientServices
     {
         if (string.IsNullOrWhiteSpace(name)) return null;
         return await _dbContext.Ingredients.FirstOrDefaultAsync(i => i.Name == name);
-    }*/
+    }
     public async Task<List<Ingredient>> AddAsync(Ingredient ingredient)
     {
         _dbContext.Ingredients.Add(ingredient);
