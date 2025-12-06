@@ -6,6 +6,9 @@ using BarBud.Interfaces;
 using Xunit;
 using BarBud.Services;
 using Moq;
+using BarBud.Db;
+using Microsoft.EntityFrameworkCore;
+
 namespace BarBud_Test
 {
 
@@ -113,6 +116,34 @@ namespace BarBud_Test
         d => d.Id == idToUpdate
           && d.Name == "Updated Name"
           && d.Description == "Updated Description");
+        }
+        //No more mocks, actually just testing the mocks above here: FAN
+        private BarBudDbContext CreateInMemoryContext()
+        {
+            var options = new DbContextOptionsBuilder<BarBudDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
+            return new BarBudDbContext(options);
+        }
+        [Fact]
+        public async Task GetAllDrinksAsync_Returns_All_Drinks()
+        {
+            //Arrange
+            using var context = CreateInMemoryContext();
+            context.Drinks.AddRange
+                (
+                new Drink { Id = 1, Name = "Spökvatten" },
+                new Drink { Id= 2, Name = "Mjölk" }
+
+                );
+            await context.SaveChangesAsync();
+            var sut = new DrinkFunctions(context);
+            //Act
+            var result = await sut.GetAllDrinksAsync();
+            //Assert
+            Assert.Equal(2, result.Count);
+            Assert.Contains(result, d => d.Name == "Spökvatten");
+            Assert.Contains(result, d => d.Name == "Mjölk");
         }
     }
 }
