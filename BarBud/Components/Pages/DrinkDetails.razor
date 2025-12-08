@@ -7,17 +7,17 @@
 <MudPaper Class="pa-4" Elevation="3">
     <MudStack Spacing="3">
         @if (loading)
-        {
+{
             <MudProgressCircular Class="ma-4" />
-        }
+}
         else if (drink is null)
         {
             <MudAlert Severity="Severity.Error">
                 Drink not found.
             </MudAlert>
         }
-        else
-        {
+else
+{
             <MudStack Row="true" JustifyContent="SpaceBetween">
                 <MudText Typo="Typo.h4">@drink.Name</MudText>
                 <MudButton Variant="Variant.Outlined" Color="Color.Primary" Href="/drinks">Back to list</MudButton>
@@ -42,7 +42,7 @@
                             <MudPaper Class="pa-3 mt-3" Elevation="1">
                                 <MudText Typo="Typo.h6">@r.Name</MudText>
                                 @if (!string.IsNullOrWhiteSpace(r.Instructions))
-                                {
+                {
                                     <MudAlert Severity="Severity.Info" Dense="true">@r.Instructions</MudAlert>
                                 }
                                 <MudTable Items="r.Ingredients" Dense="true" Hover="true">
@@ -57,10 +57,10 @@
                                 </MudTable>
                             </MudPaper>
                         }
-                    }
+                }
                 </MudTabPanel>
             </MudTabs>
-        }
+}
     </MudStack>
 </MudPaper>
 
