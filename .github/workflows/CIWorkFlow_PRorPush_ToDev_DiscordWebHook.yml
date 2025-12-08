@@ -25,12 +25,10 @@ jobs:
         if: github.event_name == 'push'
         run: |
           curl -H "Content-Type: application/json" \
-          -d "{\"content\": \"Pushed to Dev Branch: $ACTOR  pushed to $REPO: $REF commit message: $COMMIT_MSG_PUSH (SHA: $SHA)\"}" \ 
-          $DISCORD_WEBHOOK_URL
+          -d "{\"content\": \"Pushed to Dev Branch: $ACTOR  pushed to $REPO: $REF commit message: $COMMIT_MSG_PUSH (SHA: $SHA)\"}" $DISCORD_WEBHOOK_URL
 
       - name: Discord Webhook (pull_request)
         if: github.event_name == 'pull_request'
         run: |
           curl -H "Content-Type: application/json" \
-          -d "{\"content\": \"PR by $ACTOR: $PR_TITLE (PR_HEAD_SHA)\"}" \ 
-          $DISCORD_WEBHOOK_URL
+          -d "{\"content\": \"PR by $ACTOR: $PR_TITLE (PR_HEAD_SHA)\"}" $DISCORD_WEBHOOK_URL
