@@ -4,7 +4,7 @@ using BarBud.Models;
 using Microsoft.EntityFrameworkCore;
 namespace BarBud.Services;
 
-public class DrinkFunctions : IDrinkServices
+public class DrinkFunctions 
 {
     private readonly BarBudDbContext _dbContext;
 
