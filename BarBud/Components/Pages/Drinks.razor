@@ -63,7 +63,15 @@
             <MudText Typo="Typo.h6" GutterBottom="true">
                 Your drinks
             </MudText>
-
+            <MudTextField @bind-Value="SearchString"
+                          Placeholder="Search by name"
+                          Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search"
+                          Variant="Variant.Outlined"
+                          Margin="Margin.Dense"
+                          Immediate="true"
+                          Class="mb-2"
+                          FullWidth="true" />
             <MudTable Items="_drinkList" Dense="true" Hover="true" Elevation="0">
                 <HeaderContent>
                     <MudTh>Name</MudTh>

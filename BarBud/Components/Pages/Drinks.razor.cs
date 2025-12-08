@@ -17,10 +17,10 @@ namespace BarBud.Components.Pages
             set
             {
                 _searchString = value;
-                filteredDrinkList = filteredDrinkList
+                _drinkList = _drinkList
                     .Where(i => i.Name.Contains(value, StringComparison.OrdinalIgnoreCase))
                     .ToList();
-                if (string.IsNullOrWhiteSpace(value)) filteredDrinkList = _drinkList;
+                if (string.IsNullOrWhiteSpace(value)) _drinkList = filteredDrinkList;
             }
         }
 
