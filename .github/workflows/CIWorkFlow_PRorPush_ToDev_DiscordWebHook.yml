@@ -12,7 +12,7 @@ jobs:
   discord-hook:
     runs-on: ubuntu-latest
     env:
-      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
       REPO: ${{ github.repository }}
       REF: ${{ github.ref }}
       SHA: ${{ github.sha }}
