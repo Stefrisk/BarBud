@@ -27,11 +27,9 @@ jobs:
       - name: Discord Webhook (push)
         if: github.event_name == 'push'
         run: |
-          # use $DISCORD_WEBHOOK_URL and $COMMIT_MESSAGE_PUSH
           echo "Pushed to Dev branch: $ACTOR pushed to $REPO: $REF commit message: $COMMIT_MSG_PUSH (SHA: $SHA)"
 
       - name: Discord Webhook (pull_request)
         if: github.event_name == 'pull_request'
         run: |
-          # use $DISCORD_WEBHOOK_URL and $PR_TITLE / $PR_HEAD_SHA
           echo "PR to Dev branch: PR by $ACTOR: $PR_TITLE (PR_HEAD_SHA)"
