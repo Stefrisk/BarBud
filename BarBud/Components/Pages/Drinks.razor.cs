@@ -2,12 +2,13 @@
 using MudBlazor;
 using BarBud.Models;
 using BarBud.Services;
+using BarBud.Interfaces;
 
 namespace BarBud.Components.Pages
 {
     public partial class Drinks : ComponentBase
     {
-        [Inject] private DrinkFunctions DrinkService { get; set; } = null!;
+        [Inject] private IDrinkServices DrinkService { get; set; } = null!;
         private List<Drink> _drinkList = new();
        private List<Drink> filteredDrinkList = new();
         protected string? ErrorMessage { get; set; }
