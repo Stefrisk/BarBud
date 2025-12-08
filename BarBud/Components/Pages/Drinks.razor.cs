@@ -11,6 +11,20 @@ namespace BarBud.Components.Pages
         [Inject] private IDrinkServices DrinkService { get; set; } = null!;
         private List<Drink> _drinkList = new();
        private List<Drink> filteredDrinkList = new();
+        private string SearchString
+        {
+            get => _searchString;
+            set
+            {
+                _searchString = value;
+                filteredDrinkList = filteredDrinkList
+                    .Where(i => i.Name.Contains(value, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+                if (string.IsNullOrWhiteSpace(value)) filteredDrinkList = _drinkList;
+            }
+        }
+
+        private string _searchString { get; set; }
         protected string? ErrorMessage { get; set; }
         // Bind input to a simple value to avoid constructing an invalid Drink
         private string newDrinkName = string.Empty;

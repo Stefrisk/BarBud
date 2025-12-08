@@ -2,13 +2,14 @@ using Microsoft.AspNetCore.Components;
 using BarBud.Models;
 using MudBlazor;
 using BarBud.Services;
+using BarBud.Interfaces;
 
 
 namespace BarBud.Components.Pages;
 
 public partial class Ingredients : ComponentBase
 {
-    [Inject] private IngredientFunctions IngredientFunction { get; set; } = null;
+    [Inject] private IIngredientServices IngredientFunction { get; set; } = null;
 
     private List<Ingredient> _ingredientsList = new();
     private List<Ingredient> filteredIngredientsList = new();
