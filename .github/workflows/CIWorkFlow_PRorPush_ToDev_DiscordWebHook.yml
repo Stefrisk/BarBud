@@ -21,15 +21,16 @@ jobs:
       PR_TITLE: ${{ github.event.pull_request.title }}
       PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Discord Webhook (push)
         if: github.event_name == 'push'
         run: |
-          echo "Pushed to Dev branch: $ACTOR pushed to $REPO: $REF commit message: $COMMIT_MSG_PUSH (SHA: $SHA)"
+          curl -H "Content-Type: application/json" \
+          -d "{\"content\": \"Pushed to Dev Branch: $ACTOR  pushed to $REPO: $REF commit message: $COMMIT_MSG_PUSH (SHA: $SHA)\"}" \ 
+          $DISCORD_WEBHOOK_URL
 
       - name: Discord Webhook (pull_request)
         if: github.event_name == 'pull_request'
         run: |
-          echo "PR to Dev branch: PR by $ACTOR: $PR_TITLE (PR_HEAD_SHA)"
+          curl -H "Content-Type: application/json" \
+          -d "{\"content\": \"PR by $ACTOR: $PR_TITLE (PR_HEAD_SHA)\"}" \ 
+          $DISCORD_WEBHOOK_URL
