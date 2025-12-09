@@ -9,6 +9,25 @@
         <MudImage src="/BarBuddy icon .png" alt="App Logo" style="height:32px;width:auto;margin-right:12px;vertical-align:middle;" onclick="@DrawerToggle" />
         <MudText Typo="Typo.h5" Class="ml-3">BarBud</MudText>
         <MudSpacer />
+        <AuthorizeView>
+            <Authorized>
+                <MudText Class="mr-2">
+                    Hello, @context.User.Identity?.Name
+                </MudText>
+                <MudButton Variant="Variant.Text" Color="Color.Inherit" Href="/Account/Logout">
+                    Logout
+                </MudButton>
+            </Authorized>
+            <NotAuthorized>
+                <MudButton Variant="Variant.Text" Color="Color.Inherit" Href="/Account/Login">
+                    Login
+                </MudButton>
+                <MudButton Variant="Variant.Text" Color="Color.Inherit" Href="/Account/Register">
+                    Register
+                </MudButton>
+            </NotAuthorized>
+        </AuthorizeView>
+
         <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
         <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
     </MudAppBar>

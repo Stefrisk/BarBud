@@ -3,10 +3,11 @@ using BarBud.Models;
 using MudBlazor;
 using BarBud.Services;
 using BarBud.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace BarBud.Components.Pages;
-
+[Authorize]
 public partial class Ingredients : ComponentBase
 {
     [Inject] private IIngredientServices IngredientFunction { get; set; } = null;

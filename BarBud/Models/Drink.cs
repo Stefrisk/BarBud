@@ -9,8 +9,8 @@ public class Drink
     public string? Description { get; set; } = string.Empty;
 
     //User 
-    public string UserId { get; set; } = default!;
+    public string? UserId { get; set; } 
 
-    public User user { get; set; } = default!;
+    public User? user { get; set; }
     public ICollection<Recipe> Recipes { get; set; } = new List<Recipe>();
 }
