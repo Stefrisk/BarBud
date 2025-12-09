@@ -54,24 +54,34 @@ public class IngredientPage
         var id = 1;
         var mockService = new Mock<IIngredientServices>();
         mockService.Setup(s => s.DeleteAsync(It.IsAny<Int32>()))
-            .ReturnsAsync(_fakeIngredients)
-            .Callback<Int32>(id => _fakeIngredients.RemoveAll(i => i.Id == id));
+            .ReturnsAsync(() =>
+            {
+                var ingredientToRemove = _fakeIngredients.FirstOrDefault(x => x.Id == id);
+                if (ingredientToRemove != null)
+                {
+                    _fakeIngredients.Remove(ingredientToRemove);
+                    return true;
+                }
+                return false;
+            });
         // Act
         var result = await mockService.Object.DeleteAsync(id);
 
         // Assert
-        Assert.DoesNotContain(id, result.Select(i => i.Id));
+        Assert.DoesNotContain(id, _fakeIngredients.Select(i => i.Id));
+        Assert.True(result);
     }
 
     [Fact]
     public async Task UpdateAsync_ShouldUpdateIngredientInList()
     {
         // Arrange
-        var updatedIngredient = new Ingredient { Id = 1, Name = "White Rum", Description = "clear" };
+        var ingredientToUpdate = new Ingredient { Id = 1, Name = "White Rum", Description = "clear" };
+        bool didUpdate = false;
 
         var mockService = new Mock<IIngredientServices>();
         mockService.Setup(s => s.UpdateAsync(It.IsAny<Ingredient>()))
-            .ReturnsAsync(_fakeIngredients)
+            .ReturnsAsync(didUpdate)
             .Callback<Ingredient>(i =>
             {
                 var existing = _fakeIngredients.FirstOrDefault(x => x.Id == i.Id);
@@ -83,12 +93,13 @@ public class IngredientPage
             });
 
         // Act
-        var result = await mockService.Object.UpdateAsync(updatedIngredient);
+        // var result = await mockService.Object.UpdateAsync(ingredientToUpdate);
 
 
         // Assert
-        var updated = result.First(i => i.Id == 1);
+        var updated = _fakeIngredients.First(i => i.Id == 1);
         
         Assert.Equal(updated.Name, _fakeIngredients.First(i => i.Id == 1).Name);
+        Assert.True(didUpdate);
     }
 }

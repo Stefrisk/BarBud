@@ -38,13 +38,14 @@ public class IngredientFunctions : IIngredientServices
         _dbContext.Ingredients.Remove(ingredient);
         await _dbContext.SaveChangesAsync();
         return true;
-
     }
+
     public async Task<Boolean> UpdateAsync(Ingredient ingredient)
     {
-      var exists = await _dbContext.Ingredients.AnyAsync(i => i.Id == ingredient.Id);
-      if (!exists) return false;
+        var exists = await _dbContext.Ingredients.AnyAsync(i => i.Id == ingredient.Id);
+        if (!exists) return false;
         _dbContext.Ingredients.Update(ingredient);
         await _dbContext.SaveChangesAsync();
         return true;
+    }
 }
