@@ -31,22 +31,20 @@ public class IngredientFunctions : IIngredientServices
         
         return await GetAllIngredientsAsync();
     }
-    public async Task<List<Ingredient>> DeleteAsync(int id)
+    public async Task<Boolean> DeleteAsync(int id)
     {
         var ingredient = await _dbContext.Ingredients.FindAsync(id);
-        if (ingredient == null) return await GetAllIngredientsAsync();
-
+        if (ingredient == null) return false;
         _dbContext.Ingredients.Remove(ingredient);
         await _dbContext.SaveChangesAsync();
-        return await GetAllIngredientsAsync();
+        return true;
 
     }
-    public async Task<List<Ingredient>> UpdateAsync(Ingredient ingredient)
+    public async Task<Boolean> UpdateAsync(Ingredient ingredient)
     {
       var exists = await _dbContext.Ingredients.AnyAsync(i => i.Id == ingredient.Id);
-        if (!exists) return await GetAllIngredientsAsync();
+      if (!exists) return false;
         _dbContext.Ingredients.Update(ingredient);
         await _dbContext.SaveChangesAsync();
-        return await GetAllIngredientsAsync();
-    }
+        return true;
 }
