@@ -40,6 +40,19 @@ namespace BarBud.Db
                 .WithMany(i => i.RecipeIngredients)
                 .HasForeignKey(ri => ri.IngredientId).
                 OnDelete(DeleteBehavior.Restrict);
+            //User drink
+            modelBuilder.Entity<Drink>()
+                .HasOne(d => d.user)
+                .WithMany()
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //User Recipe relations
+            modelBuilder.Entity<Recipe>()
+                .HasOne(r => r.user)
+                .WithMany()
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // -----------------------------
             // Property Constraints
