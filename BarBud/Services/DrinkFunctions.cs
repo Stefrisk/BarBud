@@ -1,6 +1,7 @@
 ﻿using BarBud.Db;
 using BarBud.Interfaces;
 using BarBud.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 namespace BarBud.Services;
@@ -13,6 +14,11 @@ public class DrinkFunctions : IDrinkServices
     {
         _dbContext = db;
         _httpContextAccessor = httpContextAccessor;
+    }
+    public DrinkFunctions(BarBudDbContext db)
+    {
+        _dbContext = db;
+        _httpContextAccessor = null;
     }
     private string? CurrentUserId => _httpContextAccessor?.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     public async Task<List<Drink>> GetAllDrinksAsync()
