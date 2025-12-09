@@ -77,29 +77,30 @@ public class IngredientPage
     {
         // Arrange
         var ingredientToUpdate = new Ingredient { Id = 1, Name = "White Rum", Description = "clear" };
-        bool didUpdate = false;
 
         var mockService = new Mock<IIngredientServices>();
         mockService.Setup(s => s.UpdateAsync(It.IsAny<Ingredient>()))
-            .ReturnsAsync(didUpdate)
-            .Callback<Ingredient>(i =>
+            .ReturnsAsync((Ingredient i) =>
             {
                 var existing = _fakeIngredients.FirstOrDefault(x => x.Id == i.Id);
                 if (existing != null)
                 {
                     existing.Name = i.Name;
                     existing.Description = i.Description;
+                    return true;
                 }
+
+                return false;
             });
 
         // Act
-        // var result = await mockService.Object.UpdateAsync(ingredientToUpdate);
+        var result = await mockService.Object.UpdateAsync(ingredientToUpdate);
 
 
         // Assert
         var updated = _fakeIngredients.First(i => i.Id == 1);
         
         Assert.Equal(updated.Name, _fakeIngredients.First(i => i.Id == 1).Name);
-        Assert.True(didUpdate);
+        Assert.True(result);
     }
 }
