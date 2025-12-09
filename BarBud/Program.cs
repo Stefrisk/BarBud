@@ -50,7 +50,7 @@ builder.Services.AddIdentityCore<User>(options => options.SignIn.RequireConfirme
     .AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IEmailSender<User>, IdentityNoOpEmailSender>();
-
+builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
 app.UseAuthentication();

@@ -2,19 +2,27 @@
 using BarBud.Interfaces;
 using BarBud.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 namespace BarBud.Services;
 
 public class DrinkFunctions : IDrinkServices
 {
     private readonly BarBudDbContext _dbContext;
-
-    public DrinkFunctions(BarBudDbContext db)
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    public DrinkFunctions(BarBudDbContext db, IHttpContextAccessor httpContextAccessor)
     {
         _dbContext = db;
+        _httpContextAccessor = httpContextAccessor;
     }
+    private string? CurrentUserId => _httpContextAccessor?.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     public async Task<List<Drink>> GetAllDrinksAsync()
     {
-        return await _dbContext.Drinks.ToListAsync();
+        var userId = CurrentUserId;
+        if (userId is null)
+        {
+            return await _dbContext.Drinks.ToListAsync();
+        }
+        return await _dbContext.Drinks.Where(d => d.UserId == userId).ToListAsync();
     }
     public async Task<Drink?> GetByIdAsync(int id)
     {
@@ -22,11 +30,13 @@ public class DrinkFunctions : IDrinkServices
     }
     public async Task<Drink?> GetDetailsByIdAsync(int id)
     {
-        return await _dbContext.Drinks
-            .Include(d => d.Recipes)
-                .ThenInclude(r => r.Ingredients)
-                    .ThenInclude(ri => ri.Ingredient)
-            .FirstOrDefaultAsync(d => d.Id == id);
+        var userId = CurrentUserId;
+        var query = _dbContext.Drinks.Include(d => d.Recipes).ThenInclude(r => r.Ingredients).ThenInclude(ri => ri.Ingredient).AsQueryable();
+      if(userId is not null)
+        {
+            query = query.Where(d => d.UserId == userId);
+        }
+        return await query.FirstOrDefaultAsync(d => d.Id == id);
     }
     public async Task<Drink?> GetByNameAsync(string name)
     {
@@ -35,23 +45,43 @@ public class DrinkFunctions : IDrinkServices
     }
     public async Task<List<Drink>> AddAsync(Drink drink)
     {
+        var userId = CurrentUserId;
+        if (userId is not null)
+        {
+            drink.UserId = userId; 
+        }
         _dbContext.Drinks.Add(drink);
         await _dbContext.SaveChangesAsync();
-        return await _dbContext.Drinks.ToListAsync();
+        return await GetAllDrinksAsync();
     }
     public async Task<bool> DeleteAsync(int id)
     {
-        var drink = await _dbContext.Drinks.FindAsync(id);
+        var userId = CurrentUserId;
+        var query = _dbContext.Drinks.AsQueryable();
+        if (userId is not null)
+        {
+            query = query.Where(d => d.UserId == userId);
+        }
+        var drink = await query.FirstOrDefaultAsync(d => d.Id == id);
         if (drink == null) return false;
-
         _dbContext.Drinks.Remove(drink);
         await _dbContext.SaveChangesAsync();
         return true;
     }
     public async Task<bool> UpdateAsync(Drink drink)
     {
-        var exists = await _dbContext.Drinks.AnyAsync(c => c.Id == drink.Id);
+        var userId = CurrentUserId;
+        var query = _dbContext.Drinks.AsQueryable();
+        if (userId is not null)
+        {
+            query = query.Where(d => d.UserId == userId);
+        }
+        var exists = await query.AnyAsync(d => d.Id == drink.Id);
         if (!exists) return false;
+        if (userId is not null)
+        {
+            drink.UserId = userId; 
+        }
         _dbContext.Drinks.Update(drink);
         await _dbContext.SaveChangesAsync();
         return true;
