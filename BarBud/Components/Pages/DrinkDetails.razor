@@ -1,6 +1,9 @@
 ﻿@page "/drinks/{id:int}"
 @using BarBud.Models
-@inject BarBud.Services.DrinkFunctions DrinkService
+@using BarBud.Interfaces
+
+@inject IDrinkServices DrinkService
+
 
 <h3>Drink details</h3>
 
