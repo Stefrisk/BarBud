@@ -20,6 +20,7 @@
 
 <MudGrid Spacing="3">
     <MudItem xs="12" md="6">
+        <MudText Typo="Typo.h5" Class="my-4" Align="Align.Center">Drinks</MudText>
         <MudTable Items="@Drinks">
             <HeaderContent>
                 <MudTh>Name</MudTh>
@@ -57,10 +58,24 @@
                             </MudPaper>
                         }
                     }
-                    
+
                 </MudTd>
             </RowTemplate>
         </MudTable>
     </MudItem>
     
-    </MudGrid>
+    <MudItem xs="12" md="6">
+        <MudText Typo="Typo.h5" Class="my-4" Align="Align.Center">Ingredients</MudText>
+        <MudTable Items="@Ingredients">
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Description</MudTh>
+            </HeaderContent>
+            <RowTemplate context="ingredient">
+                <MudTd>@ingredient.Name</MudTd>
+                <MudTd>@ingredient.Description</MudTd>
+            </RowTemplate>
+        </MudTable>
+    </MudItem>
+    
+</MudGrid>
