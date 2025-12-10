@@ -61,8 +61,8 @@ namespace BarBud_Test
             var drinkIdToDelete = 1;
             var drinks = new List<Drink>
             {
-                new Drink { Id = 1, Name = "GROGG", Description = "Fan va gött" },
-                new Drink { Id = 2, Name = "ÖLLL", Description = "ÖÖÖÖÖÖÖÖÖÖÖÖLLLLLLLL" },
+                new Drink { Id = 1, Name = "GROGG", Description = "Fan va gott" },
+                new Drink { Id = 2, Name = "ÖLLL", Description = "Passar bra med Vodka" },
             };
             var mockService = new Mock<IDrinkServices>();
             mockService.Setup(service => service.DeleteAsync(drinkIdToDelete))
