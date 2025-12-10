@@ -60,8 +60,8 @@ public partial class Drinks : ComponentBase
             // Validate drink name
             if (string.IsNullOrWhiteSpace(newDrinkName))
             {
-                Name = newDrinkName.Trim(),
-                TempUserID = 1
+                ErrorMessage = "Drink name is required";
+                return;
             };
 
             // Validate recipe if creating one
@@ -72,7 +72,7 @@ public partial class Drinks : ComponentBase
             }
 
             // Create drink
-            var drink = new Drink { Name = newDrinkName.Trim() };
+            var drink = new Drink { Name = newDrinkName.Trim(), TempUserID = 1};
             var createdDrink = await DrinkService.AddAsync(drink);
 
             // Create recipe using RecipeBuilder
