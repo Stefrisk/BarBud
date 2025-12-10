@@ -50,7 +50,7 @@
                                         <MudTh>Ingredient</MudTh>
                                         <MudTh Class="text-right">Amount</MudTh>
                                     </HeaderContent>
-                                    <RowTemplate context="ri">
+                                    <RowTemplate Context="ri">
                                         <MudTd>@ri.Ingredient.Name</MudTd>
                                         <MudTd Class="text-right">@($@"{ri.Quantity:0.##} {ri.Unit}")</MudTd>
                                     </RowTemplate>
@@ -71,7 +71,7 @@
                 <MudTh>Name</MudTh>
                 <MudTh>Description</MudTh>
             </HeaderContent>
-            <RowTemplate context="ingredient">
+            <RowTemplate Context="ingredient">
                 <MudTd>@ingredient.Name</MudTd>
                 <MudTd>@ingredient.Description</MudTd>
             </RowTemplate>
