@@ -9,4 +9,5 @@ public interface IIngredientServices
     public Task<List<Ingredient>> AddAsync(Ingredient ingredient);
     public Task<List<Ingredient>> DeleteAsync(int id);
     public Task<List<Ingredient>> UpdateAsync(Ingredient ingredient);
+    public Task<Ingredient?> GetByNameAsync(string name);
 }
