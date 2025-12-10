@@ -30,7 +30,7 @@ public interface IRecipeBuilder
     /// <summary>
     /// Adds a single ingredient to the recipe
     /// </summary>
-    IRecipeBuilder AddIngredient(int ingredientId, decimal quantity, string unit);
+    IRecipeBuilder AddIngredient(int? ingredientId, decimal quantity, string unit);
     
     /// <summary>
     /// Adds multiple ingredients to the recipe
@@ -51,14 +51,4 @@ public interface IRecipeBuilder
     /// Resets the builder state for reuse
     /// </summary>
     void Reset();
-}
-
-/// <summary>
-/// Input model for recipe ingredients
-/// </summary>
-public class RecipeIngredientInput
-{
-    public int IngredientId { get; set; }
-    public decimal Quantity { get; set; }
-    public string Unit { get; set; } = string.Empty;
 }

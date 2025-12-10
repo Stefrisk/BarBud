@@ -10,8 +10,8 @@ namespace BarBud.Services;
 public class RecipeBuilder : IRecipeBuilder
 {
     private readonly IRecipeServices _recipeService;
-    private Recipe _recipe;
-    private List<RecipeIngredient> _ingredients;
+    private Recipe _recipe = null!;
+    private List<RecipeIngredient> _ingredients = null!;
 
     public RecipeBuilder(IRecipeServices recipeService)
     {
@@ -77,9 +77,9 @@ public class RecipeBuilder : IRecipeBuilder
     /// <summary>
     /// Adds a single ingredient to the recipe
     /// </summary>
-    public IRecipeBuilder AddIngredient(int ingredientId, decimal quantity, string unit)
+    public IRecipeBuilder AddIngredient(int? ingredientId, decimal quantity, string unit)
     {
-        if (ingredientId <= 0)
+        if (!ingredientId.HasValue || ingredientId <= 0)
             throw new ArgumentException("IngredientId must be greater than 0", nameof(ingredientId));
 
         if (quantity <= 0)
@@ -90,7 +90,7 @@ public class RecipeBuilder : IRecipeBuilder
 
         _ingredients.Add(new RecipeIngredient
         {
-            IngredientId = ingredientId,
+            IngredientId = ingredientId.Value,
             Quantity = quantity,
             Unit = unit.Trim()
         });

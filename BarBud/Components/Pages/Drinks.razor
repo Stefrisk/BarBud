@@ -1,5 +1,6 @@
 ﻿@page "/drinks"
 @using BarBud.Models
+@using BarBud.Components.Shared
 
 <MudPaper Class="pa-4" Elevation="3">
     <MudStack Spacing="3">
@@ -31,80 +32,12 @@
                 <MudSwitch @bind-Value="createRecipe"
                            Color="Color.Primary"
                            Label="Create recipe with this drink" />
-                          
 
                 <!-- Recipe Section (shown when toggle is enabled) -->
                 @if (createRecipe)
                 {
-                    <MudPaper Class="pa-3" Outlined="true">
-                        <MudStack Spacing="2">
-                            <MudText Typo="Typo.subtitle1" Color="Color.Primary">Recipe Details</MudText>
-
-                            <!-- Recipe Name -->
-                            <MudTextField @bind-Value="recipeName"
-                                          Label="Recipe Name"
-                                          Variant="Variant.Outlined"
-                                          FullWidth="true" />
-
-                            <!-- Ingredients List -->
-                            <MudText Typo="Typo.subtitle2">Ingredients</MudText>
-                            
-                            @foreach (var ingredient in recipeIngredients)
-                            {
-                                <MudGrid Spacing="2">
-                                    <MudItem xs="12" sm="5">
-                                        <MudSelect @bind-Value="ingredient.IngredientId"
-                                                   Label="Ingredient"
-                                                   Variant="Variant.Outlined"
-                                                   T="int?"
-                                                   AnchorOrigin="Origin.BottomCenter">
-                                            @foreach (var item in availableIngredients)
-                                            {
-                                                <MudSelectItem Value="@((int?)item.Id)">@item.Name</MudSelectItem>
-                                            }
-                                        </MudSelect>
-                                    </MudItem>
-                                    <MudItem xs="12" sm="3">
-                                        <MudNumericField @bind-Value="ingredient.Quantity"
-                                                       Label="Quantity"
-                                                       Variant="Variant.Outlined"
-                                                       Min="0m"
-                                                       Step="0.25m"
-                                                       T="decimal" />
-                                    </MudItem>
-                                    <MudItem xs="12" sm="3">
-                                        <MudTextField @bind-Value="ingredient.Unit"
-                                                     Label="Unit"
-                                                     Variant="Variant.Outlined"
-                                                     Placeholder="oz, ml, dash..." />
-                                    </MudItem>
-                                    <MudItem xs="12" sm="1">
-                                        <MudIconButton Icon="@Icons.Material.Filled.Delete"
-                                                     Color="Color.Error"
-                                                     OnClick="@(() => RemoveIngredientRow(ingredient))"
-                                                     Disabled="@(recipeIngredients.Count == 1)"
-                                                     Title="Remove ingredient" />
-                                    </MudItem>
-                                </MudGrid>
-                            }
-
-                            <MudButton Variant="Variant.Outlined"
-                                      Color="Color.Primary"
-                                      StartIcon="@Icons.Material.Filled.Add"
-                                      OnClick="AddIngredientRow"
-                                      Size="Size.Small">
-                                Add Ingredient
-                            </MudButton>
-
-                            <!-- Instructions -->
-                            <MudTextField @bind-Value="recipeInstructions"
-                                          Label="Instructions"
-                                          Variant="Variant.Outlined"
-                                          Lines="4"
-                                          FullWidth="true"
-                                          Placeholder="Describe how to prepare this drink..." />
-                        </MudStack>
-                    </MudPaper>
+                    <RecipeForm @ref="recipeForm"
+                                AvailableIngredients="@availableIngredients" />
                 }
 
                 <!-- Feedback Messages -->
