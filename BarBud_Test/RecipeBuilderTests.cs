@@ -66,8 +66,23 @@ public class RecipeBuilderTests
     public void AddIngredient_WithInvalidQuantity_ShouldThrowArgumentException()
     {
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => _sut.AddIngredient(1, 0, "oz"));
         Assert.Throws<ArgumentException>(() => _sut.AddIngredient(1, -1, "oz"));
+    }
+
+    [Fact]
+    public void AddIngredient_WithDuplicateIngredient_ShouldThrowInvalidOperationException()
+    {
+        // Arrange
+        var drink = new Drink { Id = 1, Name = "Mojito" };
+        _sut.ForDrink(drink)
+            .WithName("Classic Mojito")
+            .AddIngredient(1, 2, "oz");
+
+        // Act & Assert
+        var exception = Assert.Throws<InvalidOperationException>(() => 
+            _sut.AddIngredient(1, 1, "oz"));
+
+        Assert.Contains("Ingredient already added", exception.Message);
     }
 
     [Fact]
