@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using BarBud.Models;
-using BarBud.Services;
 using BarBud.Interfaces;
+using BarBud.Components.Shared;
 
 namespace BarBud.Components.Pages;
 
@@ -11,12 +11,14 @@ public partial class Drinks : ComponentBase
     [Inject] private IIngredientServices IngredientService { get; set; } = null!;
     [Inject] private IDrinkServices DrinkService { get; set; } = null!;
     [Inject] private IRecipeServices RecipeService { get; set; } = null!;
+    [Inject] private IRecipeBuilder RecipeBuilder { get; set; } = null!;
     [Inject] private ISnackbar Snackbar { get; set; } = null!;
 
     private List<Drink> _drinkList = new();
     private List<Drink> filteredDrinkList = new();
     protected string? ErrorMessage { get; set; }
     protected string? SuccessMessage { get; set; }
+    
     private string SearchString
     {
         get => _searchString;
@@ -30,58 +32,22 @@ public partial class Drinks : ComponentBase
         }
     }
 
-    private string _searchString { get; set; }
-
+    private string _searchString = string.Empty;
     private string newDrinkName = string.Empty;
-
-    // Recipe creation fields
     private bool createRecipe = false;
-    private string recipeName = string.Empty;
-    private string recipeInstructions = string.Empty;
-    private List<RecipeIngredientInput> recipeIngredients = new();
     private List<Ingredient> availableIngredients = new();
+    private RecipeForm? recipeForm;
 
     protected override async Task OnInitializedAsync()
     {
         await LoadDrinksAsync();
         availableIngredients = await IngredientService.GetAllIngredientsAsync();
-        
-        // Initialize with one empty ingredient row
-        if (recipeIngredients.Count == 0)
-        {
-            recipeIngredients.Add(new RecipeIngredientInput());
-        }
     }
 
     public async Task LoadDrinksAsync()
     {
         _drinkList = await DrinkService.GetAllDrinksAsync();
-    }
-
-    private void OnCreateRecipeToggle(bool value)
-    {
-        createRecipe = value;
-        if (createRecipe && recipeIngredients.Count == 0)
-        {
-            recipeIngredients.Add(new RecipeIngredientInput());
-        }
-        else if (!createRecipe)
-        {
-            // Clear recipe fields when toggled off
-            recipeName = string.Empty;
-            recipeInstructions = string.Empty;
-            recipeIngredients.Clear();
-        }
-    }
-
-    private void AddIngredientRow()
-    {
-        recipeIngredients.Add(new RecipeIngredientInput());
-    }
-
-    private void RemoveIngredientRow(RecipeIngredientInput ingredient)
-    {
-        recipeIngredients.Remove(ingredient);
+        filteredDrinkList = _drinkList;
     }
 
     public async Task AddDrinkAsync()
@@ -91,50 +57,53 @@ public partial class Drinks : ComponentBase
 
         try
         {
-            // Create drink
-            var drink = new Drink
+            // Validate drink name
+            if (string.IsNullOrWhiteSpace(newDrinkName))
             {
-                Name = newDrinkName.Trim()
-            };
+                ErrorMessage = "Drink name is required";
+                return;
+            }
 
+            // Validate recipe if creating one
+            if (createRecipe && recipeForm != null && !recipeForm.Validate())
+            {
+                ErrorMessage = "Please fill in all required recipe fields";
+                return;
+            }
+
+            // Create drink
+            var drink = new Drink { Name = newDrinkName.Trim() };
             var createdDrink = await DrinkService.AddAsync(drink);
 
-            // Create recipe if toggle is enabled
-            if (createRecipe && createdDrink is not null)
+            // Create recipe using RecipeBuilder
+            if (createRecipe && recipeForm != null && createdDrink is not null)
             {
-                var recipe = new Recipe
-                {
-                    Name = recipeName.Trim(),
-                    DrinkId = createdDrink.Id,
-                    Drink = createdDrink,
-                    Instructions = recipeInstructions.Trim(),
-                    Ingredients = recipeIngredients
-                        .Where(i => i.IngredientId.HasValue)
-                        .Select(i => new RecipeIngredient
-                        {
-                            IngredientId = i.IngredientId!.Value,
-                            Quantity = i.Quantity,
-                            Unit = i.Unit ?? string.Empty
-                        }).ToList()
-                };
+                var validIngredients = recipeForm.GetValidIngredients()
+                    .Select(i => new RecipeIngredientInput
+                    {
+                        IngredientId = i.IngredientId!.Value,
+                        Quantity = i.Quantity,
+                        Unit = i.Unit ?? string.Empty
+                    });
 
-                await RecipeService.AddAsync(recipe);
-                SuccessMessage = $"Drink '{newDrinkName}' and recipe '{recipeName}' created successfully!";
+                await RecipeBuilder
+                    .ForDrink(createdDrink)
+                    .WithName(recipeForm.RecipeName)
+                    .WithInstructions(recipeForm.Instructions)
+                    .AddIngredients(validIngredients)
+                    .BuildAndSaveAsync();
+
+                SuccessMessage = $"Drink '{newDrinkName}' and recipe created successfully!";
                 Snackbar.Add(SuccessMessage, Severity.Success);
             }
             else
             {
-                SuccessMessage = $"Drink '{newDrinkName}' created successfully!";
+                 SuccessMessage = $"Drink '{newDrinkName}' created successfully!";
                 Snackbar.Add(SuccessMessage, Severity.Success);
             }
 
             // Reset form
-            newDrinkName = string.Empty;
-            recipeName = string.Empty;
-            recipeInstructions = string.Empty;
-            recipeIngredients.Clear();
-            createRecipe = false;
-
+            ResetForm();
             await LoadDrinksAsync();
         }
         catch (Exception ex)
@@ -148,7 +117,6 @@ public partial class Drinks : ComponentBase
     {
         await DrinkService.DeleteAsync(id);
         await LoadDrinksAsync();
-        _drinkList = await DrinkService.GetAllDrinksAsync();
         Snackbar.Add("Drink deleted successfully!", Severity.Info);
     }
 
@@ -160,11 +128,10 @@ public partial class Drinks : ComponentBase
         Snackbar.Add("Drink updated successfully!", Severity.Success);
     }
 
-    // Helper class for recipe ingredient input
-    public class RecipeIngredientInput
+    private void ResetForm()
     {
-        public int? IngredientId { get; set; }
-        public decimal Quantity { get; set; }
-        public string? Unit { get; set; }
+        newDrinkName = string.Empty;
+        createRecipe = false;
+        recipeForm?.Reset();
     }
 }

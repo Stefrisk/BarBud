@@ -1,0 +1,127 @@
+@using BarBud.Models
+@using BarBud.Interfaces
+
+<MudPaper Class="pa-3" Outlined="true">
+    <MudStack Spacing="2">
+        <MudText Typo="Typo.subtitle1" Color="Color.Primary">Recipe Details</MudText>
+
+        <!-- Recipe Name -->
+        <MudTextField @bind-Value="RecipeName"
+                      Label="Recipe Name"
+                      Variant="Variant.Outlined"
+                      Required="true"
+                      FullWidth="true" />
+
+        <!-- Ingredients List -->
+        <MudText Typo="Typo.subtitle2">Ingredients</MudText>
+        
+        @foreach (var ingredient in Ingredients)
+        {
+            <MudGrid Spacing="2">
+                <MudItem xs="12" sm="5">
+                    <MudSelect @bind-Value="ingredient.IngredientId"
+                               Label="Ingredient"
+                               Variant="Variant.Outlined"
+                               T="int?"
+                               AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in AvailableIngredients)
+                        {
+                            <MudSelectItem Value="@((int?)item.Id)">@item.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12" sm="3">
+                    <MudNumericField @bind-Value="ingredient.Quantity"
+                                   Label="Quantity"
+                                   Variant="Variant.Outlined"
+                                   Min="0m"
+                                   Step="0.25m"
+                                   T="decimal" />
+                </MudItem>
+                <MudItem xs="12" sm="3">
+                    <MudTextField @bind-Value="ingredient.Unit"
+                                 Label="Unit"
+                                 Variant="Variant.Outlined"
+                                 Placeholder="oz, ml, dash..." />
+                </MudItem>
+                <MudItem xs="12" sm="1">
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                 Color="Color.Error"
+                                 OnClick="@(() => RemoveIngredient(ingredient))"
+                                 Disabled="@(Ingredients.Count == 1)"
+                                 Title="Remove ingredient" />
+                </MudItem>
+            </MudGrid>
+        }
+
+        <MudButton Variant="Variant.Outlined"
+                  Color="Color.Primary"
+                  StartIcon="@Icons.Material.Filled.Add"
+                  OnClick="AddIngredient"
+                  Size="Size.Small">
+            Add Ingredient
+        </MudButton>
+
+        <!-- Instructions -->
+        <MudTextField @bind-Value="Instructions"
+                      Label="Instructions"
+                      Variant="Variant.Outlined"
+                      Lines="4"
+                      FullWidth="true"
+                      Placeholder="Describe how to prepare this drink..." />
+    </MudStack>
+</MudPaper>
+
+@code {
+    [Parameter]
+    public List<Ingredient> AvailableIngredients { get; set; } = new();
+
+    public string RecipeName { get; set; } = string.Empty;
+    public string Instructions { get; set; } = string.Empty;
+    public List<RecipeIngredientInput> Ingredients { get; private set; } = new();
+
+    protected override void OnInitialized()
+    {
+        if (Ingredients.Count == 0)
+        {
+            Ingredients.Add(new RecipeIngredientInput());
+        }
+    }
+
+    private void AddIngredient()
+    {
+        Ingredients.Add(new RecipeIngredientInput());
+    }
+
+    private void RemoveIngredient(RecipeIngredientInput ingredient)
+    {
+        if (Ingredients.Count > 1)
+        {
+            Ingredients.Remove(ingredient);
+        }
+    }
+
+    public void Reset()
+    {
+        RecipeName = string.Empty;
+        Instructions = string.Empty;
+        Ingredients.Clear();
+        Ingredients.Add(new RecipeIngredientInput());
+    }
+
+    public bool Validate()
+    {
+        if (string.IsNullOrWhiteSpace(RecipeName))
+            return false;
+
+        if (Ingredients.All(i => !i.IngredientId.HasValue))
+            return false;
+
+        return true;
+    }
+
+    public IEnumerable<RecipeIngredientInput> GetValidIngredients()
+    {
+        return Ingredients.Where(i => i.IngredientId.HasValue);
+    }
+}
