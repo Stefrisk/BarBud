@@ -4,4 +4,5 @@ namespace BarBud.Components.Pages;
 
 public partial class User : ComponentBase
 {
+
 }

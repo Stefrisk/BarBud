@@ -1,17 +1,26 @@
 @using BarBud.Models
 @page "/User"
-<MudCard Elevation="6" Class="mb-4 w-100 rounded-lg" Style="background: var(--mud-palette-primary); background: linear-gradient(135deg, var(--mud-palette-primary) 0%, var(--mud-palette-secondary) 100%); overflow: hidden; position: relative;">
-    <div style="position: absolute; top: -30px; right: -30px; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
-    <MudCardContent Class="d-flex align-center pa-6">
-        <MudIcon Icon="@Icons.Material.Filled.VerifiedUser" Size="Size.Large" Style="color: white; width: 48px; height: 48px;" Class="mr-4" />
-        <div class="d-flex flex-column">
-            <MudText Typo="Typo.h3" Style="color: white; font-weight: 900; letter-spacing: 1px; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">
-                Your stuff
-            </MudText>
-            <MudText Typo="Typo.subtitle2" Style="color: rgba(255,255,255,0.85);">
-                Manage your inventory and recipes
-            </MudText>
-        </div>
-    </MudCardContent>
-</MudCard>
+<MudGrid>
+    <MudItem xs="12">
+        <MudCard Class="d-flex align-center justify-center max-width-full pa-6" Elevation="6" Class="mb-4 w-100 rounded-lg" Style="background: var(--mud-palette-primary); background: linear-gradient(135deg, var(--mud-palette-primary) 0%, var(--mud-palette-secondary) 100%); overflow: hidden; position: relative;">
+            <div style="position: absolute; top: -30px; right: -30px; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+            <MudCardContent>
+                <MudIcon Icon="@Icons.Material.Filled.VerifiedUser" Size="Size.Large" Style="color: white; width: 48px; height: 48px;" Class="mr-4"/>
+                <div class="d-flex flex-column">
+                    <MudText Typo="Typo.h3" Style="color: white; font-weight: 900; letter-spacing: 1px; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">
+                        Your stuff
+                    </MudText>
+                    <MudText Typo="Typo.subtitle2" Style="color: rgba(255,255,255,0.85);">
+                        Manage your inventory and recipes
+                    </MudText>
+                </div>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem>
+
+    </MudItem>
+
+</MudGrid>
+
 
