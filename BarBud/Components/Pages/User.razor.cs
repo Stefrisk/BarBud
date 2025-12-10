@@ -8,12 +8,13 @@ public partial class User : ComponentBase
 {
     [Inject] public IDrinkServices DrinkService { get; set; }
     [Inject] public IIngredientServices IngredientService { get; set; }
-    public List<Drink> Drinks { get; set; } = new();
-    public List<Ingredient> Ingredients { get; set; }
+    private List<Drink> Drinks { get; set; } = new();
+    private List<Ingredient> Ingredients { get; set; } = new();
+    private int LoggedInUserId = 1;
     protected override async Task OnInitializedAsync()
     {
-        Drinks = await DrinkService.GetAllDrinksWithDetailsAsync();
+        Drinks = await DrinkService.GetAllDrinksWithDetailsAsync(LoggedInUserId);
         
-        Ingredients = (await IngredientService.GetAllIngredientsAsync()).ToList();
+        Ingredients = await IngredientService.GetByUserIdAsync(LoggedInUserId);
     }
 }

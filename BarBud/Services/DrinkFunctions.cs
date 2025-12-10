@@ -29,9 +29,10 @@ public class DrinkFunctions : IDrinkServices
             .FirstOrDefaultAsync(d => d.Id == id);
     }
 
-    public async Task<List<Drink>> GetAllDrinksWithDetailsAsync()
+    public async Task<List<Drink>> GetAllDrinksWithDetailsAsync(int userId)
     {
         return await _dbContext.Drinks
+            .Where(d => d.TempUserID == userId)
             .Include(d => d.Recipes)
             .ThenInclude(r => r.Ingredients)
             .ThenInclude(ri => ri.Ingredient)
