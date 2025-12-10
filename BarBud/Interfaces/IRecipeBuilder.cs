@@ -52,13 +52,3 @@ public interface IRecipeBuilder
     /// </summary>
     void Reset();
 }
-
-/// <summary>
-/// Input model for recipe ingredients
-/// </summary>
-public class RecipeIngredientInput
-{
-    public int IngredientId { get; set; }
-    public decimal Quantity { get; set; }
-    public string Unit { get; set; } = string.Empty;
-}
