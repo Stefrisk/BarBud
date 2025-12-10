@@ -82,17 +82,14 @@ public class RecipeBuilder : IRecipeBuilder
         if (!ingredientId.HasValue || ingredientId <= 0)
             throw new ArgumentException("IngredientId must be greater than 0", nameof(ingredientId));
 
-        if (quantity <= 0)
-            throw new ArgumentException("Quantity must be greater than 0", nameof(quantity));
-
-        if (string.IsNullOrWhiteSpace(unit))
-            throw new ArgumentException("Unit cannot be empty", nameof(unit));
+        if (quantity < 0)
+            throw new ArgumentException("Quantity cannot be negative", nameof(quantity));
 
         _ingredients.Add(new RecipeIngredient
         {
             IngredientId = ingredientId.Value,
             Quantity = quantity,
-            Unit = unit.Trim()
+            Unit = unit?.Trim() ?? string.Empty
         });
 
         return this;
