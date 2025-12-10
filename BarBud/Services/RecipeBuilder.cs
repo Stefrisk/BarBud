@@ -85,6 +85,12 @@ public class RecipeBuilder : IRecipeBuilder
         if (quantity < 0)
             throw new ArgumentException("Quantity cannot be negative", nameof(quantity));
 
+        // Check if the ingredient ID already exists in the current list
+        if (_ingredients.Any(i => i.IngredientId == ingredientId.Value))
+        {
+            throw new InvalidOperationException($"Ingredient already added. Ingredient with ID {ingredientId} has already been added to this recipe.");
+        }
+
         _ingredients.Add(new RecipeIngredient
         {
             IngredientId = ingredientId.Value,

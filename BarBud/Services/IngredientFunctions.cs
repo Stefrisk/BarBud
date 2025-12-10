@@ -28,9 +28,12 @@ public class IngredientFunctions : IIngredientServices
     }
     public async Task<List<Ingredient>> AddAsync(Ingredient ingredient)
     {
+        var exists = await _dbContext.Ingredients.AnyAsync(i => i.Name == ingredient.Name);
+        if (exists) return await GetAllIngredientsAsync();
+
         _dbContext.Ingredients.Add(ingredient);
         await _dbContext.SaveChangesAsync();
-        
+
         return await GetAllIngredientsAsync();
     }
     public async Task<List<Ingredient>> DeleteAsync(int id)
@@ -45,7 +48,7 @@ public class IngredientFunctions : IIngredientServices
     }
     public async Task<List<Ingredient>> UpdateAsync(Ingredient ingredient)
     {
-      var exists = await _dbContext.Ingredients.AnyAsync(i => i.Id == ingredient.Id);
+        var exists = await _dbContext.Ingredients.AnyAsync(i => i.Id == ingredient.Id);
         if (!exists) return await GetAllIngredientsAsync();
         _dbContext.Ingredients.Update(ingredient);
         await _dbContext.SaveChangesAsync();
