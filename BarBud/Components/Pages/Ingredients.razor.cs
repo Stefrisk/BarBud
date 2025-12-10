@@ -29,7 +29,11 @@ public partial class Ingredients : ComponentBase
 
     private string _searchString { get; set; }
     protected string? ErrorMessage { get; set; }
-    private Ingredient NewIngredient = new();
+
+    private Ingredient NewIngredient = new()
+    {
+        TempUserID = 1
+    };
     private MudForm? form;
 
 

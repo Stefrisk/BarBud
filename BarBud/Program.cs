@@ -2,7 +2,6 @@
 using MudBlazor.Services;
 using Microsoft.EntityFrameworkCore;
 using BarBud.Db;
-
 using BarBud.Models;
 using BarBud.Components.Account;
 using BarBud.Services;
@@ -30,31 +29,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddRazorPages();
 
 
-builder.Services.AddCascadingAuthenticationState();
-
-builder.Services.AddScoped<IdentityUserAccessor>();
-
-builder.Services.AddScoped<IdentityRedirectManager>();
-
-builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
-
-builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultScheme = IdentityConstants.ApplicationScheme;
-        options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-    })
-    .AddIdentityCookies();
-
-builder.Services.AddIdentityCore<User>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<BarBudDbContext>()
-    .AddSignInManager()
-    .AddDefaultTokenProviders();
-
-builder.Services.AddSingleton<IEmailSender<User>, IdentityNoOpEmailSender>();
-
 var app = builder.Build();
-
-app.UseAuthentication();
 
 app.UseAuthorization();
 
@@ -76,7 +51,6 @@ app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-app.MapAdditionalIdentityEndpoints();
 
 // Apply migrations and seed data
 using (var scope = app.Services.CreateScope())

@@ -9,6 +9,9 @@ public class Ingredient
     public string Name { get; set; }
     public string? Description { get; set; }
 
+    public int? TempUserID { get; set; }
+    public TempUser? TempUser { get; set; }
+
     // Navigation property for the many-to-many relationship with Recipe
     public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
 }

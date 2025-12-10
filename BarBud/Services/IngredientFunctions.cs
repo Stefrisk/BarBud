@@ -15,9 +15,11 @@ public class IngredientFunctions : IIngredientServices
     {
         return await _dbContext.Ingredients.ToListAsync();
     }
-    public async Task<Ingredient?> GetByIdAsync(int id)
+    public async Task<List<Ingredient>> GetByUserIdAsync(int userId)
     {
-        return await _dbContext.Ingredients.FindAsync(id);
+        return await _dbContext.Ingredients
+            .Where(i => i.TempUserID == userId)
+            .ToListAsync();
     }
     public async Task<Ingredient?> GetByNameAsync(string name)
     {

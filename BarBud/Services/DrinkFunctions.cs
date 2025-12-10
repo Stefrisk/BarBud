@@ -28,6 +28,16 @@ public class DrinkFunctions : IDrinkServices
                     .ThenInclude(ri => ri.Ingredient)
             .FirstOrDefaultAsync(d => d.Id == id);
     }
+
+    public async Task<List<Drink>> GetAllDrinksWithDetailsAsync(int userId)
+    {
+        return await _dbContext.Drinks
+            .Where(d => d.TempUserID == userId)
+            .Include(d => d.Recipes)
+            .ThenInclude(r => r.Ingredients)
+            .ThenInclude(ri => ri.Ingredient)
+            .ToListAsync();
+    }
     public async Task<Drink?> GetByNameAsync(string name)
     {
         if (string.IsNullOrWhiteSpace(name)) return null;

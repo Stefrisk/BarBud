@@ -60,9 +60,9 @@ public partial class Drinks : ComponentBase
             // Validate drink name
             if (string.IsNullOrWhiteSpace(newDrinkName))
             {
-                ErrorMessage = "Drink name is required";
-                return;
-            }
+                Name = newDrinkName.Trim(),
+                TempUserID = 1
+            };
 
             // Validate recipe if creating one
             if (createRecipe && recipeForm != null && !recipeForm.Validate())
