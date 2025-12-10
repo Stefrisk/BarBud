@@ -10,7 +10,7 @@ namespace BarBud.Db
         public BarBudDbContext(DbContextOptions<BarBudDbContext> options) : base(options)
         {
         }
-
+        public DbSet<TempUser> TempUsers { get; set; }
         public DbSet<Drink> Drinks { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
@@ -40,6 +40,18 @@ namespace BarBud.Db
                 .WithMany(i => i.RecipeIngredients)
                 .HasForeignKey(ri => ri.IngredientId).
                 OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Drink>()
+                .HasOne(d => d.TempUser)
+                .WithMany(tu => tu.Drinks)
+                .HasForeignKey(d => d.TempUserID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Ingredient>()
+                .HasOne(i => i.TempUser)
+                .WithMany(tu => tu.Ingredients)
+                .HasForeignKey(i => i.TempUserID)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // -----------------------------
             // Property Constraints
