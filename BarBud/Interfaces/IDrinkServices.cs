@@ -9,5 +9,6 @@ namespace BarBud.Interfaces
         public Task<bool> DeleteAsync(int id);
         public Task<bool> UpdateAsync(Drink drink);
         public Task<Drink?> GetDetailsByIdAsync(int id);
+        public Task<List<Drink>> GetAllDrinksWithDetailsAsync();
     }
 }
