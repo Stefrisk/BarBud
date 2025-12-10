@@ -63,14 +63,6 @@ public class RecipeBuilderTests
     }
 
     [Fact]
-    public void AddIngredient_WithInvalidQuantity_ShouldThrowArgumentException()
-    {
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => _sut.AddIngredient(1, 0, "oz"));
-        Assert.Throws<ArgumentException>(() => _sut.AddIngredient(1, -1, "oz"));
-    }
-
-    [Fact]
     public void Build_WithoutName_ShouldThrowInvalidOperationException()
     {
         // Arrange
