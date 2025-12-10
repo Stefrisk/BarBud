@@ -33,7 +33,6 @@ public partial class Drinks : ComponentBase
     private string _searchString { get; set; }
 
     private string newDrinkName = string.Empty;
-    private MudForm? form;
 
     // Recipe creation fields
     private bool createRecipe = false;
@@ -46,6 +45,12 @@ public partial class Drinks : ComponentBase
     {
         await LoadDrinksAsync();
         availableIngredients = await IngredientService.GetAllIngredientsAsync();
+        
+        // Initialize with one empty ingredient row
+        if (recipeIngredients.Count == 0)
+        {
+            recipeIngredients.Add(new RecipeIngredientInput());
+        }
     }
 
     public async Task LoadDrinksAsync()
@@ -83,46 +88,6 @@ public partial class Drinks : ComponentBase
     {
         ErrorMessage = null;
         SuccessMessage = null;
-
-        if (form is not null)
-        {
-            await form.Validate();
-            if (!form.IsValid)
-            {
-                ErrorMessage = "Please fix validation errors.";
-                return;
-            }
-        }
-
-        if (string.IsNullOrWhiteSpace(newDrinkName))
-        {
-            ErrorMessage = "Drink name is required.";
-            return;
-        }
-
-        // Validate recipe if enabled
-        if (createRecipe)
-        {
-            if (string.IsNullOrWhiteSpace(recipeName))
-            {
-                ErrorMessage = "Recipe name is required when creating a recipe.";
-                return;
-            }
-
-            if (recipeIngredients.Count == 0 || recipeIngredients.All(i => i.IngredientId == null))
-            {
-                ErrorMessage = "At least one ingredient is required when creating a recipe.";
-                return;
-            }
-
-            // Validate each ingredient has a name selected
-            var invalidIngredients = recipeIngredients.Where(i => i.IngredientId == null).ToList();
-            if (invalidIngredients.Any())
-            {
-                ErrorMessage = "All ingredient rows must have an ingredient selected.";
-                return;
-            }
-        }
 
         try
         {
@@ -193,11 +158,6 @@ public partial class Drinks : ComponentBase
         await LoadDrinksAsync();
         filteredDrinkList = _drinkList;
         Snackbar.Add("Drink updated successfully!", Severity.Success);
-    }
-
-    private void OnInvalidSubmit()
-    {
-        ErrorMessage = "Please fix validation errors.";
     }
 
     // Helper class for recipe ingredient input
