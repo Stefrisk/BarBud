@@ -3,6 +3,7 @@ using System;
 using BarBud.Db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarBud.Migrations
 {
     [DbContext(typeof(BarBudDbContext))]
-    partial class BarBudDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251201205918_UpdateTableNameFromCocktailToDrink")]
+    partial class UpdateTableNameFromCocktailToDrink
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.0");
@@ -28,15 +31,9 @@ namespace BarBud.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("TempUserID")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TempUserID");
 
                     b.ToTable("Drinks");
                 });
@@ -47,20 +44,22 @@ namespace BarBud.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Amount")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("TempUserID")
+                    b.Property<int?>("RecipeId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TempUserID");
+                    b.HasIndex("RecipeId");
 
                     b.ToTable("Ingredients");
                 });
@@ -68,10 +67,6 @@ namespace BarBud.Migrations
             modelBuilder.Entity("BarBud.Models.Recipe", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DrinkId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Instructions")
@@ -80,57 +75,11 @@ namespace BarBud.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("TempUserId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("DrinkId");
-
-                    b.HasIndex("TempUserId");
 
                     b.ToTable("Recipes");
-                });
-
-            modelBuilder.Entity("BarBud.Models.RecipeIngredient", b =>
-                {
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("IngredientId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<decimal>("Quantity")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Unit")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("RecipeId", "IngredientId");
-
-                    b.HasIndex("IngredientId");
-
-                    b.ToTable("RecipeIngredients");
-                });
-
-            modelBuilder.Entity("BarBud.Models.TempUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TempUsers");
                 });
 
             modelBuilder.Entity("BarBud.Models.User", b =>
@@ -325,58 +274,20 @@ namespace BarBud.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BarBud.Models.Drink", b =>
-                {
-                    b.HasOne("BarBud.Models.TempUser", "TempUser")
-                        .WithMany("Drinks")
-                        .HasForeignKey("TempUserID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("TempUser");
-                });
-
             modelBuilder.Entity("BarBud.Models.Ingredient", b =>
                 {
-                    b.HasOne("BarBud.Models.TempUser", "TempUser")
+                    b.HasOne("BarBud.Models.Recipe", null)
                         .WithMany("Ingredients")
-                        .HasForeignKey("TempUserID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("TempUser");
+                        .HasForeignKey("RecipeId");
                 });
 
             modelBuilder.Entity("BarBud.Models.Recipe", b =>
                 {
-                    b.HasOne("BarBud.Models.Drink", "Drink")
-                        .WithMany("Recipes")
-                        .HasForeignKey("DrinkId")
+                    b.HasOne("BarBud.Models.Drink", null)
+                        .WithOne("Recipe")
+                        .HasForeignKey("BarBud.Models.Recipe", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("BarBud.Models.TempUser", null)
-                        .WithMany("Recipes")
-                        .HasForeignKey("TempUserId");
-
-                    b.Navigation("Drink");
-                });
-
-            modelBuilder.Entity("BarBud.Models.RecipeIngredient", b =>
-                {
-                    b.HasOne("BarBud.Models.Ingredient", "Ingredient")
-                        .WithMany("RecipeIngredients")
-                        .HasForeignKey("IngredientId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("BarBud.Models.Recipe", "Recipe")
-                        .WithMany("Ingredients")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ingredient");
-
-                    b.Navigation("Recipe");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -432,26 +343,13 @@ namespace BarBud.Migrations
 
             modelBuilder.Entity("BarBud.Models.Drink", b =>
                 {
-                    b.Navigation("Recipes");
-                });
-
-            modelBuilder.Entity("BarBud.Models.Ingredient", b =>
-                {
-                    b.Navigation("RecipeIngredients");
+                    b.Navigation("Recipe")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BarBud.Models.Recipe", b =>
                 {
                     b.Navigation("Ingredients");
-                });
-
-            modelBuilder.Entity("BarBud.Models.TempUser", b =>
-                {
-                    b.Navigation("Drinks");
-
-                    b.Navigation("Ingredients");
-
-                    b.Navigation("Recipes");
                 });
 #pragma warning restore 612, 618
         }

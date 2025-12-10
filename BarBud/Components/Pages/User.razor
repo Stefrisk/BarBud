@@ -1,0 +1,81 @@
+@using System.Runtime.Intrinsics.X86
+@using BarBud.Interfaces
+@using BarBud.Models
+@page "/User"
+
+<MudCard Class="d-flex align-center justify-center max-width-full pa-6" Elevation="6" Style="background: var(--mud-palette-primary); background: linear-gradient(135deg, var(--mud-palette-primary) 0%, var(--mud-palette-secondary) 100%); overflow: hidden; position: relative;">
+    <div style="position: absolute; top: -30px; right: -30px; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+    <MudCardContent>
+        <MudIcon Icon="@Icons.Material.Filled.VerifiedUser" Size="Size.Large" Style="color: white; width: 48px; height: 48px;" Class="mr-4"/>
+        <div class="d-flex flex-column">
+            <MudText Typo="Typo.h3" Style="color: white; font-weight: 900; letter-spacing: 1px; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">
+                Your stuff
+            </MudText>
+            <MudText Typo="Typo.subtitle2" Style="color: rgba(255,255,255,0.85);">
+                Manage your inventory and recipes
+            </MudText>
+        </div>
+    </MudCardContent>
+</MudCard>
+
+<MudGrid Spacing="3">
+    <MudItem xs="12" md="6">
+        <MudText Typo="Typo.h5" Class="my-4" Align="Align.Center">Drinks</MudText>
+        <MudTable Items="@Drinks">
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Description</MudTh>
+                <MudTh>Recipe</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>@context.Name</MudTd>
+                <MudTd>@context.Description</MudTd>
+                <MudTd>
+                    @if (context.Recipes is null || context.Recipes.Count == 0)
+                    {
+                        <MudText>No recipes added yet.</MudText>
+                    }
+                    else
+                    {
+                        @foreach (var r in context.Recipes)
+                        {
+                            <MudPaper Class="pa-2 mb-2" Elevation="1">
+                                <MudText Typo="Typo.subtitle2">@r.Name</MudText>
+                                @if (!string.IsNullOrWhiteSpace(r.Instructions))
+                                {
+                                    <MudAlert Severity="Severity.Info" Dense="true">@r.Instructions</MudAlert>
+                                }
+                                <MudTable Items="@r.Ingredients" Dense="true">
+                                    <HeaderContent>
+                                        <MudTh>Ingredient</MudTh>
+                                        <MudTh Class="text-right">Amount</MudTh>
+                                    </HeaderContent>
+                                    <RowTemplate Context="ri">
+                                        <MudTd>@ri.Ingredient.Name</MudTd>
+                                        <MudTd Class="text-right">@($@"{ri.Quantity:0.##} {ri.Unit}")</MudTd>
+                                    </RowTemplate>
+                                </MudTable>
+                            </MudPaper>
+                        }
+                    }
+
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </MudItem>
+    
+    <MudItem xs="12" md="6">
+        <MudText Typo="Typo.h5" Class="my-4" Align="Align.Center">Ingredients</MudText>
+        <MudTable Items="@Ingredients">
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Description</MudTh>
+            </HeaderContent>
+            <RowTemplate Context="ingredient">
+                <MudTd>@ingredient.Name</MudTd>
+                <MudTd>@ingredient.Description</MudTd>
+            </RowTemplate>
+        </MudTable>
+    </MudItem>
+    
+</MudGrid>

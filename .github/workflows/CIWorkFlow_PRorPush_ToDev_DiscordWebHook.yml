@@ -1,0 +1,34 @@
+name: CI_Workflow_DiscordHook_for_merge_with_Dev
+
+on:
+  push:
+    branches: [ Dev ]
+
+  pull_request:
+    branches: [ Dev ]
+
+
+jobs:
+  discord-hook:
+    runs-on: ubuntu-latest
+    env:
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
+      REPO: ${{ github.repository }}
+      REF: ${{ github.ref }}
+      SHA: ${{ github.sha }}
+      ACTOR: ${{ github.actor }}
+      COMMIT_MSG_PUSH: ${{ github.event.head_commit.message }}
+      PR_TITLE: ${{ github.event.pull_request.title }}
+      PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - name: Discord Webhook (push)
+        if: github.event_name == 'push'
+        run: |
+          curl -H "Content-Type: application/json" \
+          -d "{\"content\": \"Pushed to Dev Branch: $ACTOR  pushed to $REPO: $REF commit message: $COMMIT_MSG_PUSH (SHA: $SHA)\"}" $DISCORD_WEBHOOK_URL
+
+      - name: Discord Webhook (pull_request)
+        if: github.event_name == 'pull_request'
+        run: |
+          curl -H "Content-Type: application/json" \
+          -d "{\"content\": \"PR by $ACTOR: $PR_TITLE (PR_HEAD_SHA)\"}" $DISCORD_WEBHOOK_URL

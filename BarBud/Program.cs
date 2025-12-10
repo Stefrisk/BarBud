@@ -2,10 +2,10 @@
 using MudBlazor.Services;
 using Microsoft.EntityFrameworkCore;
 using BarBud.Db;
-
 using BarBud.Models;
 using BarBud.Components.Account;
 using BarBud.Services;
+using BarBud.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 
@@ -17,44 +17,19 @@ builder.Services.AddMudServices();
 builder.Services.AddDbContext<BarBudDbContext>(options =>
     options.UseSqlite("Data Source=barbud.db"));
 
-// Register IngredientFunctions service
-builder.Services.AddScoped<BarBud.Services.IngredientFunctions>();
-
-
-
 // Add services to the container.
+builder.Services.AddScoped<IIngredientServices, IngredientFunctions>();
+builder.Services.AddScoped<IDrinkServices, DrinkFunctions>();
+builder.Services.AddScoped<IRecipeServices, RecipeFunctions>();
+builder.Services.AddScoped<IRecipeBuilder, RecipeBuilder>();
+
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddRazorPages();
 
-builder.Services.AddScoped<CocktailFunctions>();
-
-builder.Services.AddCascadingAuthenticationState();
-
-builder.Services.AddScoped<IdentityUserAccessor>();
-
-builder.Services.AddScoped<IdentityRedirectManager>();
-
-builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
-
-builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultScheme = IdentityConstants.ApplicationScheme;
-        options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-    })
-    .AddIdentityCookies();
-
-builder.Services.AddIdentityCore<User>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<BarBudDbContext>()
-    .AddSignInManager()
-    .AddDefaultTokenProviders();
-
-builder.Services.AddSingleton<IEmailSender<User>, IdentityNoOpEmailSender>();
 
 var app = builder.Build();
-
-app.UseAuthentication();
 
 app.UseAuthorization();
 
@@ -76,7 +51,6 @@ app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-app.MapAdditionalIdentityEndpoints();
 
 // Apply migrations and seed data
 using (var scope = app.Services.CreateScope())
