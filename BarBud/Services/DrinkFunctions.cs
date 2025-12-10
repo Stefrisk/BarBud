@@ -33,11 +33,11 @@ public class DrinkFunctions : IDrinkServices
         if (string.IsNullOrWhiteSpace(name)) return null;
         return await _dbContext.Drinks.FirstOrDefaultAsync(c => c.Name == name);
     }
-    public async Task<List<Drink>> AddAsync(Drink drink)
+    public async Task<Drink> AddAsync(Drink drink)
     {
         _dbContext.Drinks.Add(drink);
         await _dbContext.SaveChangesAsync();
-        return await _dbContext.Drinks.ToListAsync();
+        return drink;
     }
     public async Task<bool> DeleteAsync(int id)
     {

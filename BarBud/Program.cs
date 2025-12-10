@@ -21,7 +21,7 @@ builder.Services.AddDbContext<BarBudDbContext>(options =>
 // Add services to the container.
 builder.Services.AddScoped<IIngredientServices, IngredientFunctions>();
 builder.Services.AddScoped<IDrinkServices, DrinkFunctions>();
-builder.Services.AddScoped<IRecipeFunctions, RecipeFunctions>();
+builder.Services.AddScoped<IRecipeServices, RecipeFunctions>();
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();

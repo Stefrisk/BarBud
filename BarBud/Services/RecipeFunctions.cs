@@ -5,7 +5,7 @@ using BarBud.Interfaces;
 
 namespace BarBud.Services;
 
-public class RecipeFunctions : IRecipeFunctions
+public class RecipeFunctions : IRecipeServices
 {
     private readonly BarBudDbContext _dbContext;
 
