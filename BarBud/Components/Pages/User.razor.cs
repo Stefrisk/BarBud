@@ -10,6 +10,7 @@ public partial class User : ComponentBase
     [Inject] public IIngredientServices IngredientService { get; set; }
     private List<Drink> Drinks { get; set; } = new();
     private List<Ingredient> Ingredients { get; set; } = new();
+
     private int LoggedInUserId = 1;
     protected override async Task OnInitializedAsync()
     {

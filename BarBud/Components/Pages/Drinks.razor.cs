@@ -94,7 +94,8 @@ public partial class Drinks : ComponentBase
             // Create drink
             var drink = new Drink
             {
-                Name = newDrinkName.Trim()
+                Name = newDrinkName.Trim(),
+                TempUserID = 1
             };
 
             var createdDrink = await DrinkService.AddAsync(drink);

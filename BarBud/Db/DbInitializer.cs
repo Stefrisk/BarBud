@@ -12,12 +12,45 @@ public static class DbInitializer
             return;
         }
 
+        var tempUser1 = new TempUser()
+        {
+            Id = 1,
+            Name = "Gimli"
+        };
+
+        var tempUser2 = new TempUser()
+        {
+            Id = 2,
+            Name = "Frodo"
+        };
+        
+        context.TempUsers.AddRange(tempUser1, tempUser2);
+        context.SaveChanges();
+
+        var ingredients = new List<Ingredient>
+        {
+            new Ingredient { Name = "Apple Juice", TempUserID = 1 },
+            new Ingredient { Name = "Coca Cola", TempUserID = 1 },
+            new Ingredient { Name = "Cranberry Juice", TempUserID = 2 },
+            new Ingredient { Name = "Fanta", TempUserID = 2 },
+            new Ingredient { Name = "Coffee Beans", TempUserID = 1 },
+            new Ingredient { Name = "Jägermeister", TempUserID = 1 },
+            new Ingredient { Name = "Irish Whiskey", TempUserID = 2 },
+            new Ingredient { Name = "Red Bull", TempUserID = 1 },
+            new Ingredient { Name = "Prosecco", TempUserID = 2 },
+            new Ingredient { Name = "Aperol", TempUserID = 2 },
+        };
+        
+        context.Ingredients.AddRange(ingredients);
+        context.SaveChanges();
+
         var drinks = new List<Drink>
         {
             new Drink
             {
                 Name = "Old Fashioned",
                 Description = "A classic whiskey cocktail.",
+                TempUserID = tempUser1.Id,
                 Recipes = new List<Recipe>
                 {
                     new Recipe
@@ -39,6 +72,7 @@ public static class DbInitializer
             {
                 Name = "Margarita",
                 Description = "Refreshing tequila, lime, and triple sec.",
+                TempUserID = tempUser2.Id,
                 Recipes = new List<Recipe>
                 {
                     new Recipe
@@ -60,6 +94,7 @@ public static class DbInitializer
             {
                 Name = "Negroni",
                 Description = "Equal parts gin, Campari, and sweet vermouth.",
+                TempUserID = tempUser1.Id,
                 Recipes = new List<Recipe>
                 {
                     new Recipe
@@ -81,6 +116,7 @@ public static class DbInitializer
             {
                 Name = "Mojito",
                 Description = "Minty, lime, and rum highball.",
+                TempUserID = tempUser1.Id,
                 Recipes = new List<Recipe>
                 {
                     new Recipe
@@ -103,6 +139,7 @@ public static class DbInitializer
             {
                 Name = "Whiskey Sour",
                 Description = "Balanced sweet and sour whiskey cocktail.",
+                TempUserID = tempUser2.Id,
                 Recipes = new List<Recipe>
                 {
                     new Recipe
