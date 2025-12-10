@@ -45,14 +45,14 @@ namespace BarBud_Test
             .ReturnsAsync((Drink d) =>
             {
                 drinks.Add(d);
-                return drinks;
+                return drink;
             });
             //Act
             var actual = await mockService.Object.AddAsync(drink);
 
             //Assert
-            Assert.Equal(drinks, actual);
-            Assert.Contains(actual, d => d.Name == drink.Name && d.Description == drink.Description);
+            Assert.Equal(drink, actual);
+            Assert.Contains(drinks, d => d.Name == drink.Name && d.Description == drink.Description);
         }
         [Fact]
         public async Task Delete_ShouldRemoveDrinkFromList()
