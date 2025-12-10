@@ -21,6 +21,7 @@ builder.Services.AddDbContext<BarBudDbContext>(options =>
 builder.Services.AddScoped<IIngredientServices, IngredientFunctions>();
 builder.Services.AddScoped<IDrinkServices, DrinkFunctions>();
 builder.Services.AddScoped<IRecipeServices, RecipeFunctions>();
+builder.Services.AddScoped<IRecipeBuilder, RecipeBuilder>();
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
